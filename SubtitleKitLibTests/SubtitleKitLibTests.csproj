@@ -2,19 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-
-    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="coveralls.net" Version="0.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="NuGet.CommandLine" Version="4.3.0" />
     <PackageReference Include="xunit" Version="2.3.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0" />
+	<PackageReference Include="OpenCover" Version="4.6.519">
+	<PrivateAssets>All</PrivateAssets>
+	</PackageReference>
+	<PackageReference Include="OpenCoverToCoberturaConverter" Version="0.2.6">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SubtitlesParser\Test\SubtitlesParserTests.csproj" />
     <ProjectReference Include="..\SubtitleKitLib\SubtitleKitLib\SubtitleKitLib.csproj" />
+    <ProjectReference Include="..\SubtitleParsers\SubtitleParsers.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,9 +29,132 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="SubtitlesParser">
-      <HintPath>..\..\SubtitlesParser\SubtitlesParser\bin\Release\SubtitlesParser.dll</HintPath>
-    </Reference>
+    <None Update="Content\SubtitlesFiles\20140115-194321_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140115-204540_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140115-204541_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140116-103727_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140116-103736_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140116-121030_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140116-122022_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140116-152304_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140117-211217_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140117-235243_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140118-044614_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140118-173751_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140118-184856_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\20140119-151331_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\Annie Hall - Eng 25fps.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\battlestar.galactica.s03e09.ws.dsr.xvid-orenji.eng.sub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\corruptsub.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\Freaks - Freaks, la monstrueuse parade %28Tod Browning - 1932%29.sub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\HellBoy 2 The Golden Army.ssa">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\How I Met Your Mother - 3x01 - Wait For It.en.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\HP2.ssa">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\Jack_the_Giant_Slayer.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\jPod.S01E01.HDTV.XviD-2HD.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\Lost_and_Delirious_fr.ssa">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\Pirates of Caraibean CD1.sub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\Remember the Titans[2000]DvDrip[Eng]-prithwi %281%29.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\Remember the Titans[2000]DvDrip[Eng]-prithwi.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\Rise.of.the.Guardians.2012.BDRip.XViD-SPARKS.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\20140120-074450_invalidSub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\4989_ES.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\ccSubs_com_pope-francis-speaks-about-religious-liberty_en.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\Children.of.Men.2006.DVD5.720p.HDDVD.x264-REVEiLLE.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\cloudy.with.a.risk.of.meatballs.ttml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\Fight Club_eng.sub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\Game of Thrones - 03x05 - Kissed by Fire.2HD.English.HI.C.orig.Addic7ed.com.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\Gangs-of-New-York-DVD-Deadman-2.sub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\kYB8IZa5AuE.en.ttml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\Orange.is.the.new.black.s01e01.ttml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\Salvage.SRT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\The Mentalist - 3x11 - Episode 11.fr.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\timedtext.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\TestFiles\Wiedzmin.s01e01.DVDRip.DreamLair.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

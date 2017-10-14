@@ -1,0 +1,11 @@
+language: csharp
+solution: SubtitleKitLib/SubtitleKitLib.sln
+dist: trusty
+mono: none
+dotnet: 2.0.0
+install:
+- dotnet restore SubtitleKitLib/SubtitleKitLib.sln
+script:
+- dotnet --info
+- dotnet build --configuration Release SubtitleKitLib/SubtitleKitLib.sln
+- dotnet test SubtitleKitLibTests/SubtitleKitLibTests.csproj

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
-using System.IO;
-using SubtitlesParser.Classes.Parsers;
 using System.Collections.Generic;
 using System.Text;
 

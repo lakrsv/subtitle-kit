@@ -13,7 +13,7 @@ namespace SubtitleKitLibTests.Subtitle
 
         public static ISubtitle GetValidSubtitle()
         {
-            var subtitleCreator = new SubtitleKitLib.Subtitle.SubtitleCreator();
+            var subtitleCreator = new SubtitleCreator();
 
             var subtitlePath = SubtitleFolderPath + ValidSubtitleName;
             var subtitleStream = File.OpenRead(subtitlePath);

@@ -4,10 +4,18 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+  </PropertyGroup>
+  
   <ItemGroup>
-    <Reference Include="SubtitlesParser">
-      <HintPath>..\..\..\SubtitlesParser\SubtitlesParser\bin\Release\SubtitlesParser.dll</HintPath>
-    </Reference>
+    <PackageReference Include="NuGet.CommandLine" Version="4.3.0" />
+    <PackageReference Include="OpenCover" Version="4.6.519" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SubtitleParsers\SubtitleParsers.csproj" />
   </ItemGroup>
 
 </Project>
