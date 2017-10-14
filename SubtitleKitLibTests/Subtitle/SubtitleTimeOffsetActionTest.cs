@@ -13,7 +13,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Subtitle_IsOffset()
         {
-            var subtitle = SubtitleContainer.GetValidSubtitle();
+            var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var offset = TimeSpan.FromSeconds(1);
             var timeOffsetAction = new SubtitleTimeOffsetAction(offset, subtitle);
 
@@ -44,7 +44,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Subtitle_IsOffset2()
         {
-            var subtitle = SubtitleContainer.GetValidSubtitle();
+            var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var offset = TimeSpan.FromSeconds(-1);
             var timeOffsetAction = new SubtitleTimeOffsetAction(offset, subtitle);
 
@@ -75,7 +75,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Subtitle_IsOriginal_WhenActionUndone()
         {
-            var subtitle = SubtitleContainer.GetValidSubtitle();
+            var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var offset = TimeSpan.FromSeconds(1);
             var timeOffsetAction = new SubtitleTimeOffsetAction(offset, subtitle);
 

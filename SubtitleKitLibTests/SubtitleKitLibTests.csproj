@@ -74,6 +74,12 @@
     <None Update="Content\SubtitlesFiles\Annie Hall - Eng 25fps.srt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Content\SubtitlesFiles\badsubtitle.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\badsubtitle2.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Content\SubtitlesFiles\battlestar.galactica.s03e09.ws.dsr.xvid-orenji.eng.sub">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,0 +1,9 @@
+﻿{d25d}{1175}
+{1d187}{1275}- Tout est en place|- Tu n'étais pas sensé me relever.
+{12d87}{1s350}Je sais, mais je pensais me débrouiller.
+{1362}{1425}Tu l'aimes bien, non ?|T'aimes le regarder.
+{14f37}{1f500}- Ne sois pas ridicule.|- On va le tuer. Tu comprends ça ?
+{1512}{1d575}Morpheus pense qu'il est l'Elu.
+{15z87}{1600}Et toi ?
+{16a12}{1s650}Peu importe ce que je crois.
+{1662}{17z00}Tu ne crois pas, hein ?

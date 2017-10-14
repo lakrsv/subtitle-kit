@@ -13,7 +13,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Cloned_Subtitle_MatchesOriginal()
         {
-            var subtitle = SubtitleContainer.GetValidSubtitle();
+            var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var clone = (ISubtitle)subtitle.Clone();
 
             Assert.True(subtitle.Items.SequenceEqual(clone.Items));
@@ -22,7 +22,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Cloned_Subtitle_IsNotReference()
         {
-            var subtitle = SubtitleContainer.GetValidSubtitle();
+            var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var clone = (ISubtitle)subtitle.Clone();
 
             Assert.False(subtitle.Items.Equals(clone.Items));
@@ -31,7 +31,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Subtitle_ToString_MatchesSource()
         {
-            var subtitle = SubtitleContainer.GetValidSubtitle();
+            var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var subtitleCreator = new SubtitleCreator();
 
             var subtitleString = subtitle.ToString();
