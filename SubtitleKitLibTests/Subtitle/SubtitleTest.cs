@@ -15,8 +15,18 @@ namespace SubtitleKitLibTests.Subtitle
         {
             var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var clone = (ISubtitle)subtitle.Clone();
+            bool matchesOriginal = true;
 
-            Assert.True(subtitle.Items.SequenceEqual(clone.Items));
+            for (int i = 0; i < subtitle.Items.Count; i++)
+            {
+                if (!string.Equals(subtitle.Items[i].ToString(), clone.Items[i].ToString(), StringComparison.Ordinal))
+                {
+                    matchesOriginal = false;
+                    break;
+                }
+            }
+
+            Assert.True(matchesOriginal);
         }
 
         [Fact]
