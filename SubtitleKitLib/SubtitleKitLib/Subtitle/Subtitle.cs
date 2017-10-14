@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SubtitleKitLib.Subtitle
@@ -17,7 +18,12 @@ namespace SubtitleKitLib.Subtitle
 
         public object Clone()
         {
-            return new Subtitle(FilePath, new List<SubtitlesParser.Classes.SubtitleItem>(Items));
+            return new Subtitle(FilePath, Items.ConvertAll(x => new SubtitlesParser.Classes.SubtitleItem()
+            {
+                StartTime = x.StartTime,
+                EndTime = x.EndTime,
+                Lines = x.Lines.ToList()
+            }));
         }
 
         public override string ToString()

@@ -1,10 +1,12 @@
 ﻿
+using System;
+
 namespace SubtitleKitLib.Actions
 {
     public interface IAction
     {
-        void PerformAction();
+        void PerformAction(Action onCompleted);
 
-        void UndoAction();
+        void UndoAction(Action onCompleted);
     }
 }

@@ -7,8 +7,8 @@ namespace SubtitleKitLib.Actions
 {
     public interface IActionPerformer
     {      
-        void PerformAction(IAction action);
+        void PerformAction(IAction action, Action onCompleted);
 
-        IAction UndoPreviousAction();
+        IAction UndoPreviousAction(Action onCompleted);
     }
 }

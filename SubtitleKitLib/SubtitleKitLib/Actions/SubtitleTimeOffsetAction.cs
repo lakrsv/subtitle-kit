@@ -14,13 +14,15 @@ namespace SubtitleKitLib.Actions
             _offset = offset;
         }
 
-        public override void PerformAction()
+        public override void PerformAction(Action onCompleted = null)
         {
-            foreach(var item in originalSubtitle.Items)
+            foreach(var item in Subtitle.Items)
             {
                 item.StartTime += _offset.Milliseconds;
                 item.EndTime += _offset.Milliseconds;
             }
+
+            onCompleted?.Invoke();
         }
     }
 }

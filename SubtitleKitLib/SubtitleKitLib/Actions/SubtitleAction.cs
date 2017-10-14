@@ -7,21 +7,22 @@ namespace SubtitleKitLib.Actions
 {
     public abstract class SubtitleAction : IAction
     {
-        protected ISubtitle originalSubtitle;
+        private ISubtitle _originalSubtitle;
 
         public ISubtitle Subtitle { get; private set; }
 
         protected SubtitleAction(ISubtitle subtitle)
         {
-            originalSubtitle = (ISubtitle)subtitle.Clone();
+            _originalSubtitle = (ISubtitle)subtitle.Clone();
             Subtitle = subtitle;
         }
 
-        public abstract void PerformAction();
+        public abstract void PerformAction(Action onCompleted = null);
 
-        public virtual void UndoAction()
+        public virtual void UndoAction(Action onCompleted = null)
         {
-            Subtitle = originalSubtitle;
+            Subtitle = _originalSubtitle;
+            onCompleted?.Invoke();
         }
     }
 }

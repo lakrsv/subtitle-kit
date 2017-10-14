@@ -10,23 +10,23 @@ namespace SubtitleKitLib.Actions
     {
         private readonly Stack<IAction> _performedActions = new Stack<IAction>();
 
-        public void PerformAction(IAction action)
+        public void PerformAction(IAction action, Action onCompleted = null)
         {
             if(action == null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
 
-            action.PerformAction();
+            action.PerformAction(onCompleted);
             _performedActions.Push(action);
         }
 
-        public IAction UndoPreviousAction()
+        public IAction UndoPreviousAction(Action onCompleted = null)
         {
             if (_performedActions.Count > 0)
             {
                 var action = _performedActions.Pop();
-                action.UndoAction();
+                action.UndoAction(onCompleted);
                 return action;
             }
 
