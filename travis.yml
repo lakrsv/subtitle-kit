@@ -1,0 +1,11 @@
+language: csharp
+mono: none
+dotnet: 2.0.0
+dist: trusty
+install:
+    - nuget restore SubtitleKitLib/SubtitleKibLib.sln
+    - nuget install xunit.runners -Version 2.3.0 -OutputDirectory testrunner
+script:
+    - dotnet restore
+    - xbuild /p:Configuration=Release SubtitleKitLib/SubtitleKibLib.sln
+    - mono ./testrunner/xunit.runners.2.3.0/tools/xunit.console.clr4.exe ./SubtitleKitLibTests/bin/Release/netcoreapp2.0/SubtitleKitLib.dll
