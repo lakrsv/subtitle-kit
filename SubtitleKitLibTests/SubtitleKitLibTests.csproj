@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="coveralls.net" Version="0.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="NSubstitute" Version="3.0.1" />
     <PackageReference Include="NuGet.CommandLine" Version="4.3.0" />
     <PackageReference Include="xunit" Version="2.3.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0" />
@@ -22,10 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SubtitleKitLib\SubtitleKitLib\SubtitleKitLib.csproj" />
     <ProjectReference Include="..\SubtitleParsers\SubtitleParsers.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Actions\" />
   </ItemGroup>
 
   <ItemGroup>

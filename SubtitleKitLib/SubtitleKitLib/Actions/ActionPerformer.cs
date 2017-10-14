@@ -4,20 +4,15 @@ using System.Text;
 using SubtitleKitLib.Actions;
 using System.Diagnostics.Contracts;
 
-namespace SubtitleKitLib.Subtitle
+namespace SubtitleKitLib.Actions
 {
-    public class SubtitleTransformer : ISubtitleTransformer
+    public class ActionPerformer : IActionPerformer
     {
         private readonly Stack<IAction> _performedActions = new Stack<IAction>();
 
-        public void PerformAction(IAction action, Subtitle subtitle)
+        public void PerformAction(IAction action)
         {
             if(action == null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
-
-            if(subtitle == null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -26,13 +21,8 @@ namespace SubtitleKitLib.Subtitle
             _performedActions.Push(action);
         }
 
-        public IAction UndoPreviousAction(Subtitle subtitle)
+        public IAction UndoPreviousAction()
         {
-            if(subtitle == null)
-            {
-                throw new ArgumentNullException(nameof(subtitle));
-            }
-
             if (_performedActions.Count > 0)
             {
                 var action = _performedActions.Pop();
