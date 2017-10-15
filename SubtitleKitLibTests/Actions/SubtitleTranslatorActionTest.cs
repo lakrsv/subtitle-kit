@@ -1,4 +1,5 @@
 ﻿using SubtitleKitLib.Actions;
+using SubtitleKitLib.Azure;
 using SubtitleKitLib.Subtitle;
 using SubtitleKitLibTests.Subtitle;
 using System;
@@ -11,7 +12,7 @@ namespace SubtitleKitLibTests.Actions
 {
     public class SubtitleTranslatorActionTest
     {
-        [Fact]
+        [Fact (Skip = "Requires Secret keys, not available")]
         public void Translating_ValidSub_Passes()
         {
             var validSub = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
