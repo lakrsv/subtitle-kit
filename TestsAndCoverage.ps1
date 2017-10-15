@@ -54,5 +54,5 @@ foreach ($testProject in $testProjects){
 
 
 "Publishing test results to Codecov"
-choco install codecov -y
+#choco install codecov -y
 codecov -f "$PSScriptRoot\OpenCover.xml" -t $Env:CodeCovToken
