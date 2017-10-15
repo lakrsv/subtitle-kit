@@ -17,9 +17,9 @@
     <PackageReference Include="NuGet.CommandLine" Version="4.3.0" />
     <PackageReference Include="OpenCover" Version="4.6.519" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\..\SubtitleParsers\SubtitleParsers.csproj" />
+    <ProjectReference Include="..\SubtitleParsers\SubtitleParsers.csproj" />
   </ItemGroup>
 
 </Project>

@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SubtitleKitLib\SubtitleKitLib\SubtitleKitLib.csproj" />
+    <ProjectReference Include="..\SubtitleKitLib\SubtitleKitLib.csproj" />
     <ProjectReference Include="..\SubtitleParsers\SubtitleParsers.csproj" />
   </ItemGroup>
 

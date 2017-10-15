@@ -1,12 +1,12 @@
 image: Visual Studio 2017
 
 before_build:
-- dotnet restore SubtitleKitLib/SubtitleKitLib.sln
+- dotnet restore SubtitleKitLib.sln
 - choco install opencover.portable
 - choco install codecov
 
 build:
-  project: SubtitleKitLib/SubtitleKitLib.sln
+  project: SubtitleKitLib.sln
   verbosity: minimal
 
 test_script:
