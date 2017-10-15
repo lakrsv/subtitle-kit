@@ -19,7 +19,7 @@ namespace SubtitleKitLib.Azure
 
         public static Secrets GetSecrets()
         {
-            return new Secrets(Environment.GetEnvironmentVariable("SubClientId", EnvironmentVariableTarget.Machine), Environment.GetEnvironmentVariable("SubClientSecret", EnvironmentVariableTarget.Machine), Environment.GetEnvironmentVariable("SubSecretUri", EnvironmentVariableTarget.Machine));
+            return new Secrets(Environment.GetEnvironmentVariable("SubClientId", EnvironmentVariableTarget.User), Environment.GetEnvironmentVariable("SubClientSecret", EnvironmentVariableTarget.User), Environment.GetEnvironmentVariable("SubSecretUri", EnvironmentVariableTarget.User));
         }
     }
 }
