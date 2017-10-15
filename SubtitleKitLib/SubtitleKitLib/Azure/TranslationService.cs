@@ -16,6 +16,7 @@ namespace SubtitleKitLib.Azure
 
         private static string _authorizationKey;
         private static DateTime? _keyGenerationTime = null;
+        private const int _keyExpirationTimeSeconds = 550;
 
         public static async Task<SubtitleItem[]> TranslateArrayAsync(SubtitleItem[] items, CultureInfo culture, string authToken)
         {
@@ -128,7 +129,7 @@ namespace SubtitleKitLib.Azure
         {
             if (_keyGenerationTime.HasValue)
             {
-                if (DateTime.Now.TimeOfDay.TotalSeconds - _keyGenerationTime.Value.TimeOfDay.TotalSeconds < 550)
+                if (DateTime.Now.TimeOfDay.TotalSeconds - _keyGenerationTime.Value.TimeOfDay.TotalSeconds < _keyExpirationTimeSeconds)
                 {
                     return _authorizationKey;
                 }
