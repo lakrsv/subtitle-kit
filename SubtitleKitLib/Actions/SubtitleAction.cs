@@ -26,7 +26,7 @@ namespace SubtitleKitLib.Actions
 
         public virtual void UndoAction(Action onCompleted = null)
         {
-            Subtitle = _originalSubtitle;
+            Subtitle.Set(_originalSubtitle);
             onCompleted?.Invoke();
         }
     }

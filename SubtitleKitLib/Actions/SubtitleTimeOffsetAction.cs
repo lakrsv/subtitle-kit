@@ -18,8 +18,8 @@ namespace SubtitleKitLib.Actions
         {
             foreach(var item in Subtitle.Items)
             {
-                item.StartTime += _offset.Milliseconds;
-                item.EndTime += _offset.Milliseconds;
+                item.StartTime += (int)_offset.TotalMilliseconds;
+                item.EndTime += (int)_offset.TotalMilliseconds;
             }
 
             onCompleted?.Invoke();

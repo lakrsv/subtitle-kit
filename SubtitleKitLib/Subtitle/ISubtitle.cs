@@ -9,6 +9,8 @@ namespace SubtitleKitLib.Subtitle
 
         List<SubtitlesParser.Classes.SubtitleItem> Items { get; }
 
+        void Set(ISubtitle subtitle);
+
         string ToString();
     }
 }

@@ -7,13 +7,19 @@ namespace SubtitleKitLib.Subtitle
 {
     public class Subtitle : ISubtitle
     {
-        public string FilePath { get; }
+        public string FilePath { get; private set; }
         public List<SubtitlesParser.Classes.SubtitleItem> Items { get; private set; }
 
         internal Subtitle(string filePath, List<SubtitlesParser.Classes.SubtitleItem> subtitleItems)
         {
             FilePath = filePath;
             Items = subtitleItems;
+        }
+
+        public void Set(ISubtitle subtitle)
+        {
+            FilePath = subtitle.FilePath;
+            Items = subtitle.Items;
         }
 
         public object Clone()

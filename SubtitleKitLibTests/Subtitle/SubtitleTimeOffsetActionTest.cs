@@ -30,14 +30,14 @@ namespace SubtitleKitLibTests.Subtitle
                 var originalTime = originalStartTimes[i];
                 var newTime = newStartTimes[i];
 
-                Assert.True(newTime == originalTime + offset.Milliseconds);
+                Assert.True(newTime == originalTime + offset.TotalMilliseconds);
             }
             for(int i = 0; i < originalEndTimes.Length; i++)
             {
                 var originalTime = originalEndTimes[i];
                 var newTime = newEndTimes[i];
 
-                Assert.True(newTime == originalTime + offset.Milliseconds);
+                Assert.True(newTime == originalTime + offset.TotalMilliseconds);
             }
         }
 
@@ -61,14 +61,14 @@ namespace SubtitleKitLibTests.Subtitle
                 var originalTime = originalStartTimes[i];
                 var newTime = newStartTimes[i];
 
-                Assert.True(newTime == originalTime + offset.Milliseconds);
+                Assert.True(newTime == originalTime + offset.TotalMilliseconds);
             }
             for (int i = 0; i < originalEndTimes.Length; i++)
             {
                 var originalTime = originalEndTimes[i];
                 var newTime = newEndTimes[i];
 
-                Assert.True(newTime == originalTime + offset.Milliseconds);
+                Assert.True(newTime == originalTime + offset.TotalMilliseconds);
             }
         }
 
