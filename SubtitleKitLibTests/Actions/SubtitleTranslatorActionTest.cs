@@ -12,7 +12,7 @@ namespace SubtitleKitLibTests.Actions
 {
     public class SubtitleTranslatorActionTest
     {
-        [Fact (Skip = "Requires Secret keys, not available")]
+        [Fact (Skip = "Requires Secret keys, not available on GitHub")]
         public void Translating_ValidSub_Passes()
         {
             var validSub = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
