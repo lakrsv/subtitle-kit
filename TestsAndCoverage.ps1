@@ -57,4 +57,4 @@ foreach ($testProject in $testProjects){
 #& $latestCoveralls --opencover --i "$PSScriptRoot\OpenCover.coverageresults" --useRelativePaths
 
 "Publishing test results to Codecov"
-$lastestCodecov -f "$PSScriptRoot\OpenCover.coverageresults" -f $Env:CodeCovToken
+$lastestCodecov -f "$PSScriptRoot\OpenCover.coverageresults" -f -t $Env:CodeCovToken
