@@ -13,6 +13,11 @@ namespace SubtitleKitLib.Actions
 
         protected SubtitleAction(ISubtitle subtitle)
         {
+            if (subtitle == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             _originalSubtitle = (ISubtitle)subtitle.Clone();
             Subtitle = subtitle;
         }

@@ -25,9 +25,9 @@ namespace SubtitleKitLib.Actions
 
         private async void TranslateSubtitle(Action onCompleted)
         {
-            var kv = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(AzureAuthenticator.GetToken));
+            var azureAuthenticator = new AzureAuthenticator();
+            var kv = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureAuthenticator.GetToken));
             var sec = await kv.GetSecretAsync(new Secrets().SecretId);
-            AzureAuthenticator.EncryptSecret = sec.Value;
 
             var newItems = await TranslationService.TranslateArrayAsync(Subtitle.Items.ToArray(), _culture, sec.Value);
 
