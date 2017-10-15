@@ -16,7 +16,8 @@ namespace SubtitleKitLib.Azure
         public static async Task<string> GetToken(string authority, string resource, string scope)
         {
             var authContext = new AuthenticationContext(authority);
-            ClientCredential clientCred = new ClientCredential(Secrets.ClientId, Secrets.ClientKey);
+            var secrets = new Secrets();
+            ClientCredential clientCred = new ClientCredential(secrets.ClientId, secrets.ClientKey);
             AuthenticationResult result = await authContext.AcquireTokenAsync(resource, clientCred);
 
             if (result == null)
