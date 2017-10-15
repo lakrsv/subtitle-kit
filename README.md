@@ -1,5 +1,5 @@
 # SubtitleKit
 [![Build Status](https://travis-ci.org/lakrsv/SubtitleKit.svg?branch=master)](https://travis-ci.org/lakrsv/SubtitleKit)
-[![Coverage Status](https://coveralls.io/repos/github/lakrsv/SubtitleKit/badge.svg?branch=)](https://coveralls.io/github/lakrsv/SubtitleKit?branch=)
+[![codecov](https://codecov.io/gh/lakrsv/SubtitleKit/branch/master/graph/badge.svg)](https://codecov.io/gh/lakrsv/SubtitleKit)
 
 An easy to use utility to quickly edit subtitles. (Time Offset, Translate Subtitles,etc.)

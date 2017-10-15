@@ -50,4 +50,4 @@ foreach ($testProject in $testProjects){
     "-sources:$PSScriptRoot"
 	
 "Publishing test results to Coveralls.io"
-& $latestCoveralls --opencover --i "$PSScriptRoot\OpenCover.coverageresults" --useRelativePaths
+& $latestCoveralls --opencover --i "$PSScriptRoot\OpenCover.xml" --useRelativePaths

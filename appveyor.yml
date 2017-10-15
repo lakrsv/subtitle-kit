@@ -1,0 +1,15 @@
+image: Visual Studio 2017
+
+before_build:
+- dotnet restore SubtitleKitLib/SubtitleKitLib.sln
+- choco install opencover.portable
+- choco install codecov
+
+build:
+  project: SubtitleKitLib/SubtitleKitLib.sln
+  verbosity: minimal
+
+test_script:
+- OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test SubtitleKitLibTests/SubtitleKitLibTests.csproj -f netcoreapp2.0 -c Debug" -filter:"+[SubtitleKitLib*]* -[SubtitleKitLibTests*]*" -output:".\OpenCover.xml" -oldStyle
+
+- codecov -f "OpenCover.xml
