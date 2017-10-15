@@ -10,6 +10,7 @@ namespace SubtitleKitLibTests.Subtitle
     {
         public static string SubtitleFolderPath = @"Content/SubtitlesFiles/";
         public static string ValidSubtitleName = "Annie Hall - Eng 25fps.srt";
+        public static string ValidShortSubtitleName = "shortsub.srt";
         public static string InvalidSubtitleName = "badsubtitle.srt";
         public static string InvalidSubtitleName2 = "badsubtitle2.srt";
 

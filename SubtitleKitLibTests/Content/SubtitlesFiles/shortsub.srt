@@ -1,0 +1,7 @@
+﻿1
+00:00:01,000 --> 00:00:04,074
+Subtitles downloaded from www.OpenSubtitles.org
+
+2
+00:00:44,353 --> 00:00:46,328  X1:243 X2:478 Y1:374 Y2:410
+There's an old joke.

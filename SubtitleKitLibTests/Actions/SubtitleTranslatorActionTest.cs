@@ -15,7 +15,7 @@ namespace SubtitleKitLibTests.Actions
         [Fact]
         public void Translating_ValidSub_Passes()
         {
-            var validSub = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
+            var validSub = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidShortSubtitleName);
             var validSubClone = (ISubtitle)validSub.Clone();
             var subtitleTranslator = new SubtitleTranslatorAction(validSub, new CultureInfo("no"));
 

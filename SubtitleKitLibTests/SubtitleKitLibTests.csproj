@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Codecov" Version="1.0.3" />
     <PackageReference Include="coveralls.net" Version="0.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="NSubstitute" Version="3.0.1" />
@@ -114,6 +115,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Content\SubtitlesFiles\Rise.of.the.Guardians.2012.BDRip.XViD-SPARKS.srt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\SubtitlesFiles\shortsub.srt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Content\TestFiles\20140120-074450_invalidSub">

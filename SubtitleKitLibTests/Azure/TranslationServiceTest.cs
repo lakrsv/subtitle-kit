@@ -13,7 +13,7 @@ namespace SubtitleKitLibTests.Azure
         [Fact]
         public async void Translation_WithNullAuthKey_ThrowsArgumentNullExceptionAsync()
         {
-            var validSubtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
+            var validSubtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidShortSubtitleName);
 
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
