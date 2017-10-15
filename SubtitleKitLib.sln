@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubtitleKitLibTests", "Subt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubtitleParsers", "SubtitleParsers\SubtitleParsers.csproj", "{EBAFD81C-3DD3-4AB1-93D7-1E22746CA0D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleKitLibUWP", "SubtitleKitLibUWP\SubtitleKitLibUWP.csproj", "{784561E2-344E-4141-8720-701D236FAD60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,32 @@ Global
 		{EBAFD81C-3DD3-4AB1-93D7-1E22746CA0D1}.Release|x64.Build.0 = Release|Any CPU
 		{EBAFD81C-3DD3-4AB1-93D7-1E22746CA0D1}.Release|x86.ActiveCfg = Release|Any CPU
 		{EBAFD81C-3DD3-4AB1-93D7-1E22746CA0D1}.Release|x86.Build.0 = Release|Any CPU
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|ARM.ActiveCfg = Debug|ARM
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|ARM.Build.0 = Debug|ARM
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|ARM.Deploy.0 = Debug|ARM
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|x64.ActiveCfg = Debug|x64
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|x64.Build.0 = Debug|x64
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|x64.Deploy.0 = Debug|x64
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|x86.ActiveCfg = Debug|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|x86.Build.0 = Debug|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Debug|x86.Deploy.0 = Debug|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|Any CPU.ActiveCfg = Release|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|ARM.ActiveCfg = Release|ARM
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|ARM.Build.0 = Release|ARM
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|ARM.Deploy.0 = Release|ARM
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|Mixed Platforms.Build.0 = Release|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|x64.ActiveCfg = Release|x64
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|x64.Build.0 = Release|x64
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|x64.Deploy.0 = Release|x64
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|x86.ActiveCfg = Release|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|x86.Build.0 = Release|x86
+		{784561E2-344E-4141-8720-701D236FAD60}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
