@@ -9,8 +9,8 @@ $nugetCoberturaConverterPackage = Join-Path -Path "C:\Users\lakrs" -ChildPath "\
 $latestCoberturaConverter = Join-Path -Path (Get-ChildItem -Path $nugetCoberturaConverterPackage | Sort-Object Fullname -Descending)[0].FullName -ChildPath "tools\OpenCoverToCoberturaConverter.exe"
 
 # Get the most recent Coveralls-net package from the dotnet nuget packages
-#$nugetCoverallsPackage = Join-Path -Path "C:\users\lakrs" -ChildPath "\.nuget\packages\coveralls.net"
-#$latestCoveralls = Join-Path -Path ((Get-ChildItem -Path $nugetCoverallsPackage | Sort-Object Fullname -Descending)[0].FullName) -ChildPath "tools\csmacnz.Coveralls.exe"
+$nugetCoverallsPackage = Join-Path -Path "C:\users\lakrs" -ChildPath "\.nuget\packages\coveralls.net"
+$latestCoveralls = Join-Path -Path ((Get-ChildItem -Path $nugetCoverallsPackage | Sort-Object Fullname -Descending)[0].FullName) -ChildPath "tools\csmacnz.Coveralls.exe"
 
 If (Test-Path "$PSScriptRoot\OpenCover.coverageresults"){
 	Remove-Item "$PSScriptRoot\OpenCover.coverageresults"
@@ -49,10 +49,5 @@ foreach ($testProject in $testProjects){
     -output:"$PSScriptRoot\Cobertura.xml" `
     "-sources:$PSScriptRoot"
 	
-#"Publishing test results to Coveralls.io"
-#& $latestCoveralls --opencover --i "$PSScriptRoot\OpenCover.coverageresults" --useRelativePaths
-
-
-"Publishing test results to Codecov"
-#choco install codecov -y
-codecov -f "$PSScriptRoot\OpenCover.xml" -t $Env:CodeCovToken
+"Publishing test results to Coveralls.io"
+& $latestCoveralls --opencover --i "$PSScriptRoot\OpenCover.coverageresults" --useRelativePaths
