@@ -2,11 +2,11 @@
 {
     using System.IO;
 
-    static class StreamHelpers
+    internal static class StreamHelpers
     {
         /// <summary>
-        /// Copies a stream to another stream.
-        /// This method is useful in particular when the inputStream is not seekable.
+        ///     Copies a stream to another stream.
+        ///     This method is useful in particular when the inputStream is not seekable.
         /// </summary>
         /// <param name="inputStream">The stream to copy</param>
         /// <returns>A copy of the input Stream</returns>

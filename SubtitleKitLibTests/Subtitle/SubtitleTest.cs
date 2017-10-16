@@ -23,7 +23,11 @@
         {
             var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var clone = (ISubtitle)subtitle.Clone();
-            var matchesOriginal = !subtitle.Items.Where((t, i) => !string.Equals(t.ToString(), clone.Items[i].ToString(), StringComparison.Ordinal)).Any();
+            var matchesOriginal = !subtitle.Items.Where(
+                                      (t, i) => !string.Equals(
+                                                    t.ToString(),
+                                                    clone.Items[i].ToString(),
+                                                    StringComparison.Ordinal)).Any();
 
             Assert.True(matchesOriginal);
         }

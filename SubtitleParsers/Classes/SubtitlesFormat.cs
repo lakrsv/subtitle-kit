@@ -17,17 +17,18 @@
         public static readonly SubtitlesFormat SubViewerFormat =
             new SubtitlesFormat { Name = "SubViewer", Extension = @"\.sub" };
 
-        public static readonly SubtitlesFormat TtmlFormat = new SubtitlesFormat { Name = "TTML", Extension = @"\.ttml" };
+        public static readonly SubtitlesFormat TtmlFormat = new SubtitlesFormat { Name = "TTML", Extension = @"\.ttml" }
+            ;
 
         public static readonly SubtitlesFormat WebVttFormat =
             new SubtitlesFormat { Name = "WebVTT", Extension = @"\.vtt" };
 
         public static readonly SubtitlesFormat YoutubeXmlFormat = new SubtitlesFormat
-        {
-            Name = "YoutubeXml"
+                                                                      {
+                                                                          Name = "YoutubeXml"
 
-            // Extension = @"\.*"
-        };
+                                                                          // Extension = @"\.*"
+                                                                      };
 
         public static readonly List<SubtitlesFormat> SupportedSubtitlesFormats =
             new List<SubtitlesFormat>

@@ -16,7 +16,6 @@
                            @"D:\Documents\Visual Studio Projects\SubtitleKit\SubtitleKitLibCLI\bin\Debug\netcoreapp2.0\lalalando.srt"
                        };
                        */
-
             var action = new Action();
             for (var i = 0; i < args.Length; i += 2)
             {

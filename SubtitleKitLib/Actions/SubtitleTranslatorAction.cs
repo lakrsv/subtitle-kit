@@ -29,10 +29,7 @@
             var kv = new KeyVaultClient(azureAuthenticator.GetToken);
             var sec = await kv.GetSecretAsync(new Secrets().SecretId);
 
-            var newItems = await TranslationService.TranslateArrayAsync(
-                               Subtitle.Items.ToArray(),
-                               _culture,
-                               sec.Value);
+            var newItems = await TranslationService.TranslateArrayAsync(Subtitle.Items.ToArray(), _culture, sec.Value);
 
             for (var i = 0; i < Subtitle.Items.Count; i++) Subtitle.Items[i].Lines = newItems[i].Lines;
 

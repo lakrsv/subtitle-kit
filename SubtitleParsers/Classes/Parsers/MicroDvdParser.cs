@@ -9,46 +9,45 @@
     using System.Text.RegularExpressions;
 
     /// <summary>
-    /// Parser for MicroDVD .sub subtitles files
-    /// 
-    /// A .sub file looks like this:
-    /// {1}{1}29.970
-    /// {0}{180}PIRATES OF THE CARIBBEAN|English subtitlez by tHe.b0dY
-    /// {509}{629}Drink up me 'earties yo ho!
-    /// {635}{755}We kidnap and ravage and don't give a hoot.
-    /// 
-    /// We need the video frame rate to extract .sub files -> careful when using it
-    /// 
-    /// see https://en.wikipedia.org/wiki/MicroDVD
+    ///     Parser for MicroDVD .sub subtitles files
+    ///     A .sub file looks like this:
+    ///     {1}{1}29.970
+    ///     {0}{180}PIRATES OF THE CARIBBEAN|English subtitlez by tHe.b0dY
+    ///     {509}{629}Drink up me 'earties yo ho!
+    ///     {635}{755}We kidnap and ravage and don't give a hoot.
+    ///     We need the video frame rate to extract .sub files -> careful when using it
+    ///     see https://en.wikipedia.org/wiki/MicroDVD
     /// </summary>
     public class MicroDvdParser : ISubtitlesParser
     {
+        private const string LineRegex = @"^[{\[](-?\d+)[}\]][{\[](-?\d+)[}\]](.*)";
+
         // Properties -----------------------------------------------------------------------
-
         private readonly float _defaultFrameRate = 25;
-        private readonly char[] _lineSeparators = {'|'};
 
+        private readonly char[] _lineSeparators = { '|' };
 
         // Constructors --------------------------------------------------------------------
-
-        public MicroDvdParser(){}
+        public MicroDvdParser()
+        {
+        }
 
         public MicroDvdParser(float defaultFrameRate)
         {
             _defaultFrameRate = defaultFrameRate;
         }
 
-
         // Methods -------------------------------------------------------------------------
-
         public List<SubtitleItem> ParseStream(Stream subStream, Encoding encoding)
         {
             // test if stream if readable and seekable (just a check, should be good)
             if (!subStream.CanRead || !subStream.CanSeek)
             {
-                var message = string.Format("Stream must be seekable and readable in a subtitles parser. " +
-                                   "Operation interrupted; isSeekable: {0} - isReadable: {1}", 
-                                   subStream.CanSeek, subStream.CanSeek);
+                var message = string.Format(
+                    "Stream must be seekable and readable in a subtitles parser. "
+                    + "Operation interrupted; isSeekable: {0} - isReadable: {1}",
+                    subStream.CanSeek,
+                    subStream.CanSeek);
                 throw new ArgumentException(message);
             }
 
@@ -58,15 +57,14 @@
 
             var items = new List<SubtitleItem>();
             var line = reader.ReadLine();
+
             // find the first relevant line
-            while (line != null && !IsMicroDvdLine(line))
-            {
-                line = reader.ReadLine();
-            }
+            while (line != null && !IsMicroDvdLine(line)) line = reader.ReadLine();
 
             if (line != null)
             {
                 float frameRate;
+
                 // try to extract the framerate from the first line
                 var firstItem = ParseLine(line, _defaultFrameRate);
                 if (firstItem.Lines != null && firstItem.Lines.Any())
@@ -74,8 +72,11 @@
                     var success = TryExtractFrameRate(firstItem.Lines[0], out frameRate);
                     if (!success)
                     {
-                        Console.WriteLine("Couldn't extract frame rate of sub file with first line {0}. " +
-                                          "We use the default frame rate: {1}", line, _defaultFrameRate);
+                        Console.WriteLine(
+                            "Couldn't extract frame rate of sub file with first line {0}. "
+                            + "We use the default frame rate: {1}",
+                            line,
+                            _defaultFrameRate);
                         frameRate = _defaultFrameRate;
 
                         // treat it as a regular line
@@ -94,23 +95,16 @@
                     if (!string.IsNullOrEmpty(line))
                     {
                         var item = ParseLine(line, frameRate);
-                        items.Add(item); 
+                        items.Add(item);
                     }
+
                     line = reader.ReadLine();
                 }
             }
 
-            if (items.Any())
-            {
-                return items;
-            }
-            else
-            {
-                throw new ArgumentException("Stream is not in a valid MicroDVD format");
-            }
+            if (items.Any()) return items;
+            throw new ArgumentException("Stream is not in a valid MicroDVD format");
         }
-
-        private const string LineRegex = @"^[{\[](-?\d+)[}\]][{\[](-?\d+)[}\]](.*)";
 
         private bool IsMicroDvdLine(string line)
         {
@@ -118,10 +112,9 @@
         }
 
         /// <summary>
-        /// Parses one line of the .sub file
-        /// 
-        /// ex:
-        /// {0}{180}PIRATES OF THE CARIBBEAN|English subtitlez by tHe.b0dY
+        ///     Parses one line of the .sub file
+        ///     ex:
+        ///     {0}{180}PIRATES OF THE CARIBBEAN|English subtitlez by tHe.b0dY
         /// </summary>
         /// <param name="line">The .sub file line</param>
         /// <param name="frameRate">The frame rate with which the .sub file was created</param>
@@ -138,29 +131,22 @@
                 var text = match.Groups[match.Groups.Count - 1].Value;
                 var lines = text.Split(_lineSeparators);
                 var nonEmptyLines = lines.Where(l => !string.IsNullOrEmpty(l)).ToList();
-                var item = new SubtitleItem
-                    {
-                        Lines = nonEmptyLines,
-                        StartTime = start,
-                        EndTime = end
-                    };
+                var item = new SubtitleItem { Lines = nonEmptyLines, StartTime = start, EndTime = end };
 
                 return item;
             }
-            else
-            {
-                var message = string.Format("The subtitle file line {0} is " +
-                                            "not in the micro dvd format. We stop the process.", line);
-                throw new InvalidDataException(message);
-            }
+
+            var message = string.Format(
+                "The subtitle file line {0} is " + "not in the micro dvd format. We stop the process.",
+                line);
+            throw new InvalidDataException(message);
         }
 
         /// <summary>
-        /// Tries to extract the frame rate from a subtitle file line.
-        /// 
-        /// Supported formats are:
-        /// - {x}{y}25
-        /// - {x}{y}{...}23.976
+        ///     Tries to extract the frame rate from a subtitle file line.
+        ///     Supported formats are:
+        ///     - {x}{y}25
+        ///     - {x}{y}{...}23.976
         /// </summary>
         /// <param name="text">The subtitle file line</param>
         /// <param name="frameRate">The frame rate if we can parse it</param>
@@ -169,16 +155,16 @@
         {
             if (!string.IsNullOrEmpty(text))
             {
-                var success = float.TryParse(text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture,
-                                             out frameRate);
+                var success = float.TryParse(
+                    text,
+                    NumberStyles.AllowDecimalPoint,
+                    CultureInfo.InvariantCulture,
+                    out frameRate);
                 return success;
             }
-            else
-            {
-                frameRate = _defaultFrameRate;
-                return false;
-            }
-        }
 
+            frameRate = _defaultFrameRate;
+            return false;
+        }
     }
 }
