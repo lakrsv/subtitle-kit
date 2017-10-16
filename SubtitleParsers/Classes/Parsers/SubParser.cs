@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace SubtitlesParser.Classes.Parsers
+﻿namespace SubtitleParsers.Classes.Parsers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
     public class SubParser 
     {
         // Properties -----------------------------------------------------------------------
@@ -24,9 +24,6 @@ namespace SubtitlesParser.Classes.Parsers
 
 
         // Constructors --------------------------------------------------------------------
-
-        public SubParser(){}
-
 
         // Methods -------------------------------------------------------------------------
 
@@ -114,25 +111,16 @@ namespace SubtitlesParser.Classes.Parsers
 
             foreach (var subtitlesParser in subFormatDictionary)
             {
-                try
-                {
-                    var parser = subtitlesParser.Value;
-                    var items = parser.ParseStream(seekableStream, encoding);
+                var parser = subtitlesParser.Value;
+                var items = parser.ParseStream(seekableStream, encoding);
 
-                    // safeguard
-                    if (items.Any())
-                    {
-                        return items;
-                    }
-                    else
-                    {
-                        throw new FormatException(string.Format("Failed to parse as {0}", subtitlesParser.Key));
-                    }
-                }
-                catch(Exception ex)
+                // safeguard
+                if (items.Any())
                 {
-                    throw ex;
+                    return items;
                 }
+
+                throw new FormatException(string.Format("Failed to parse as {0}", subtitlesParser.Key));
             }
 
             // all the parsers failed
@@ -150,7 +138,7 @@ namespace SubtitlesParser.Classes.Parsers
         /// <returns>The first characters of the stream</returns>
         private string LogFirstCharactersOfStream(Stream stream, int nbOfCharactersToPrint, Encoding encoding)
         {
-            var message = "";
+            string message;
             // print the first 500 characters
             if (stream.CanRead)
             {

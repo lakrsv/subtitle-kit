@@ -18,7 +18,7 @@
 
         public ISubtitle Subtitle { get; }
 
-        public abstract void PerformAction(Action onCompleted = null);
+        public abstract void PerformAction(Action onCompleted);
 
         public virtual void UndoAction(Action onCompleted = null)
         {

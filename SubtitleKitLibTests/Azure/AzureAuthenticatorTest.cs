@@ -19,10 +19,7 @@
             var kv = new KeyVaultClient(azureAuthenticator.GetToken);
 
             await Assert.ThrowsAsync<KeyVaultErrorException>(
-                async () =>
-                    {
-                        var sec = await kv.GetSecretAsync(new Secrets().SecretId);
-                    });
+                async () => { await kv.GetSecretAsync(new Secrets().SecretId); });
         }
 
         [Fact]

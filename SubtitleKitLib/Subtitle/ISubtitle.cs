@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    using SubtitlesParser.Classes;
+    using SubtitleParsers.Classes;
 
     public interface ISubtitle : ICloneable
     {

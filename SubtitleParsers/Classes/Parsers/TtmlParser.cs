@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-
-namespace SubtitlesParser.Classes.Parsers
+﻿namespace SubtitleParsers.Classes.Parsers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Xml.Linq;
+
     public class TtmlParser : ISubtitlesParser
     {
         public List<SubtitleItem> ParseStream(Stream xmlStream, Encoding encoding)
@@ -28,15 +26,15 @@ namespace SubtitlesParser.Classes.Parsers
                 {
                     var reader = node.CreateReader();
                     reader.MoveToContent();
-                    var beginString = node.Attribute("begin").Value.Replace("t", "");
+                    var beginString = node.Attribute("begin").Value.Replace("t", string.Empty);
                     var startTicks = ParseTimecode(beginString);
-                    var endString = node.Attribute("end").Value.Replace("t", "");
+                    var endString = node.Attribute("end").Value.Replace("t", string.Empty);
                     var endTicks = ParseTimecode(endString);
                     var text = reader.ReadInnerXml()
                         .Replace("<tt:", "<")
                         .Replace("</tt:", "</")
-                        .Replace(string.Format(@" xmlns:tt=""{0}""", tt), "")
-                        .Replace(string.Format(@" xmlns=""{0}""", tt), "");
+                        .Replace(string.Format(@" xmlns:tt=""{0}""", tt), string.Empty)
+                        .Replace(string.Format(@" xmlns=""{0}""", tt), string.Empty);
 
                     items.Add(new SubtitleItem()
                     {
@@ -66,14 +64,12 @@ namespace SubtitlesParser.Classes.Parsers
         /// <returns>The parsed timecode as a TimeSpan instance. If the parsing was unsuccessful, -1 is returned (subtitles should never show)</returns>
         private static long ParseTimecode(string s)
         {
-            TimeSpan result;
-            if (TimeSpan.TryParse(s, out result))
+            if (TimeSpan.TryParse(s, out var result))
             {
                 return (long) result.TotalMilliseconds;
             }
             // Netflix subtitles have a weird format: timecodes are specified as ticks. Ex: begin="79249170t"
-            long ticks;
-            if (long.TryParse(s.TrimEnd('t'), out ticks))
+            if (long.TryParse(s.TrimEnd('t'), out var ticks))
             {
                 return ticks/10000;
             }

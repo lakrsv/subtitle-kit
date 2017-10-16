@@ -1,7 +1,7 @@
-﻿using System.IO;
-
-namespace SubtitlesParser.Classes
+﻿namespace SubtitleParsers.Classes
 {
+    using System.IO;
+
     static class StreamHelpers
     {
         /// <summary>

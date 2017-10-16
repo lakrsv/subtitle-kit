@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace SubtitlesParser.Classes.Parsers
+﻿namespace SubtitleParsers.Classes.Parsers
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+
     /// <summary>
     /// Interface specifying the required method for a SubParser.
     /// </summary>

@@ -9,7 +9,7 @@
     using System.Threading.Tasks;
     using System.Xml.Linq;
 
-    using SubtitlesParser.Classes;
+    using SubtitleParsers.Classes;
 
     public class TranslationService
     {
@@ -18,8 +18,6 @@
         private static string _authorizationKey;
 
         private static DateTime? _keyGenerationTime;
-
-        public static object HttpUtility { get; private set; }
 
         public static async Task<SubtitleItem[]> TranslateArrayAsync(
             SubtitleItem[] items,

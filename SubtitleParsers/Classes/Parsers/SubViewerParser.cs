@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace SubtitlesParser.Classes.Parsers
+﻿namespace SubtitleParsers.Classes.Parsers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// Parser for SubViewer .sub subtitles files
     /// 
@@ -150,17 +150,12 @@ namespace SubtitlesParser.Classes.Parsers
         /// <returns>The parsed timecode as a TimeSpan instance. If the parsing was unsuccessful, -1 is returned (subtitles should never show)</returns>
         private int ParseTimecode(string s)
         {
-            TimeSpan result;
-
-            if (TimeSpan.TryParse(s, out result))
+            if (TimeSpan.TryParse(s, out var result))
             {
                 var nbOfMs = (int)result.TotalMilliseconds;
                 return nbOfMs;
             }
-            else
-            {
-                return -1;
-            }
+            return -1;
         }
 
         /// <summary>

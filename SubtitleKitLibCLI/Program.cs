@@ -5,6 +5,7 @@
         // TODO - Clean this up. This is for testing only now.
         private static void Main(string[] args)
         {
+            /*
             // Usage: -f "file" -l "Language" -o "output"
             // Usage: -f "file" -t seconds -o "output"
             args = new[]
@@ -14,6 +15,7 @@
                            "-l", "pl", "-o",
                            @"D:\Documents\Visual Studio Projects\SubtitleKit\SubtitleKitLibCLI\bin\Debug\netcoreapp2.0\lalalando.srt"
                        };
+                       */
 
             var action = new Action();
             for (var i = 0; i < args.Length; i += 2)

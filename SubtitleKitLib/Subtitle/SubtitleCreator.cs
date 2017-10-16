@@ -5,7 +5,7 @@
     using System.Net;
     using System.Text;
 
-    using SubtitlesParser.Classes.Parsers;
+    using SubtitleParsers.Classes.Parsers;
 
     public class SubtitleCreator : ISubtitleCreator
     {
@@ -73,17 +73,13 @@
 
         private ISubtitle GetSubtitleFromStream(string filePath, Stream stream)
         {
-            Subtitle subtitle = null;
+            Subtitle subtitle;
             var parser = new SubParser();
 
             try
             {
                 var items = parser.ParseStream(stream);
                 subtitle = new Subtitle(filePath, items);
-            }
-            catch (FormatException e)
-            {
-                throw e;
             }
             catch (ArgumentException e)
             {

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace SubtitlesParser.Classes.Parsers
+﻿namespace SubtitleParsers.Classes.Parsers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// Parser for the .srt subtitles files
     /// 
@@ -28,9 +28,6 @@ namespace SubtitlesParser.Classes.Parsers
         
 
         // Constructors --------------------------------------------------------------------
-
-        public SrtParser(){}
-
 
         // Methods -------------------------------------------------------------------------
 
@@ -57,7 +54,7 @@ namespace SubtitlesParser.Classes.Parsers
                 foreach (var srtSubPart in srtSubParts)
                 {
                     var lines =
-                        srtSubPart.Split(new string[] {Environment.NewLine}, StringSplitOptions.None)
+                        srtSubPart.Split(new[] {Environment.NewLine}, StringSplitOptions.None)
                             .Select(s => s.Trim())
                             .Where(l => !string.IsNullOrEmpty(l))
                             .ToList();
@@ -68,9 +65,7 @@ namespace SubtitlesParser.Classes.Parsers
                         if (item.StartTime == 0 && item.EndTime == 0)
                         {
                             // we look for the timecodes first
-                            int startTc;
-                            int endTc;
-                            var success = TryParseTimecodeLine(line, out startTc, out endTc);
+                            var success = TryParseTimecodeLine(line, out var startTc, out var endTc);
                             if (success)
                             {
                                 item.StartTime = startTc;
@@ -176,8 +171,7 @@ namespace SubtitlesParser.Classes.Parsers
             if (match.Success)
             {
                 s = match.Value;
-                TimeSpan result;
-                if (TimeSpan.TryParse(s.Replace(',', '.'), out result))
+                if (TimeSpan.TryParse(s.Replace(',', '.'), out var result))
                 {
                     var nbOfMs = (int)result.TotalMilliseconds;
                     return nbOfMs;

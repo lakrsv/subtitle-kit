@@ -78,19 +78,17 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Subtitle_Created_WithNullString_ThrowsArgumentNullException()
         {
-            string subString = null;
             var subtitleCreator = new SubtitleCreator();
 
-            Assert.Throws<ArgumentNullException>(() => subtitleCreator.CreateFromString(subString));
+            Assert.Throws<ArgumentNullException>(() => subtitleCreator.CreateFromString(null));
         }
 
         [Fact]
         public void Subtitle_Created_WithNullUri_ThrowsArgumentNullException()
         {
-            Uri uri = null;
             var subtitleCreator = new SubtitleCreator();
 
-            Assert.Throws<ArgumentNullException>(() => subtitleCreator.CreateFromUri(uri));
+            Assert.Throws<ArgumentNullException>(() => subtitleCreator.CreateFromUri(null));
         }
 
         [Fact]

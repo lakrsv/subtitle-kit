@@ -14,6 +14,7 @@
             _offset = offset;
         }
 
+        // ReSharper disable once OptionalParameterHierarchyMismatch
         public override void PerformAction(Action onCompleted = null)
         {
             foreach (var item in Subtitle.Items)

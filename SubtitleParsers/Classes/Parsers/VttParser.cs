@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace SubtitlesParser.Classes.Parsers
+﻿namespace SubtitleParsers.Classes.Parsers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// Parser for the .vtt subtitles files. Does not handle formatting tags within the text; that has to be parsed separately.
     /// 
@@ -30,9 +30,6 @@ namespace SubtitlesParser.Classes.Parsers
 
 
         // Constructors --------------------------------------------------------------------
-
-        public VttParser() { }
-
 
         // Methods -------------------------------------------------------------------------
 
@@ -59,7 +56,7 @@ namespace SubtitlesParser.Classes.Parsers
                 foreach (var vttSubPart in vttSubParts)
                 {
                     var lines =
-                        vttSubPart.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+                        vttSubPart.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                                   .Select(s => s.Trim())
                                   .Where(l => !string.IsNullOrEmpty(l))
                                   .ToList();
@@ -70,9 +67,7 @@ namespace SubtitlesParser.Classes.Parsers
                         if (item.StartTime == 0 && item.EndTime == 0)
                         {
                             // we look for the timecodes first
-                            int startTc;
-                            int endTc;
-                            var success = TryParseTimecodeLine(line, out startTc, out endTc);
+                            var success = TryParseTimecodeLine(line, out var startTc, out var endTc);
                             if (success)
                             {
                                 item.StartTime = startTc;
@@ -195,8 +190,7 @@ namespace SubtitlesParser.Classes.Parsers
             if (!string.IsNullOrEmpty(timeString))
             {
                 timeString = timeString.Replace(',', '.');
-                TimeSpan result;
-                if (TimeSpan.TryParse(timeString, out result))
+                if (TimeSpan.TryParse(timeString, out var result))
                 {
                     var nbOfMs = (int)result.TotalMilliseconds;
                     return nbOfMs;

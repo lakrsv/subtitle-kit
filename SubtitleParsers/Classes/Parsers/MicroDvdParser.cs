@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace SubtitlesParser.Classes.Parsers
+﻿namespace SubtitleParsers.Classes.Parsers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// Parser for MicroDVD .sub subtitles files
     /// 
@@ -25,7 +25,7 @@ namespace SubtitlesParser.Classes.Parsers
     {
         // Properties -----------------------------------------------------------------------
 
-        private readonly float defaultFrameRate = 25;
+        private readonly float _defaultFrameRate = 25;
         private readonly char[] _lineSeparators = {'|'};
 
 
@@ -35,7 +35,7 @@ namespace SubtitlesParser.Classes.Parsers
 
         public MicroDvdParser(float defaultFrameRate)
         {
-            this.defaultFrameRate = defaultFrameRate;
+            _defaultFrameRate = defaultFrameRate;
         }
 
 
@@ -68,15 +68,15 @@ namespace SubtitlesParser.Classes.Parsers
             {
                 float frameRate;
                 // try to extract the framerate from the first line
-                var firstItem = ParseLine(line, defaultFrameRate);
+                var firstItem = ParseLine(line, _defaultFrameRate);
                 if (firstItem.Lines != null && firstItem.Lines.Any())
                 {
                     var success = TryExtractFrameRate(firstItem.Lines[0], out frameRate);
                     if (!success)
                     {
                         Console.WriteLine("Couldn't extract frame rate of sub file with first line {0}. " +
-                                          "We use the default frame rate: {1}", line, defaultFrameRate);
-                        frameRate = defaultFrameRate;
+                                          "We use the default frame rate: {1}", line, _defaultFrameRate);
+                        frameRate = _defaultFrameRate;
 
                         // treat it as a regular line
                         items.Add(firstItem);
@@ -84,7 +84,7 @@ namespace SubtitlesParser.Classes.Parsers
                 }
                 else
                 {
-                    frameRate = defaultFrameRate;
+                    frameRate = _defaultFrameRate;
                 }
 
                 // parse other lines
@@ -175,7 +175,7 @@ namespace SubtitlesParser.Classes.Parsers
             }
             else
             {
-                frameRate = defaultFrameRate;
+                frameRate = _defaultFrameRate;
                 return false;
             }
         }

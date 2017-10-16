@@ -13,10 +13,9 @@
         [Fact]
         public void Performer_PerformNullAction_ThrowsArgumentNullException()
         {
-            IAction action = null;
             var actionPerformer = new ActionPerformer();
 
-            Assert.Throws<ArgumentNullException>(() => actionPerformer.PerformAction(action));
+            Assert.Throws<ArgumentNullException>(() => actionPerformer.PerformAction(null));
         }
 
         [Fact]

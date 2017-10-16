@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SubtitlesParser.Classes
+﻿namespace SubtitleParsers.Classes
 {
+    using System;
+    using System.Collections.Generic;
+
     public class SubtitleItem
     {
 

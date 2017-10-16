@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-namespace SubtitlesParser.Classes.Parsers
+﻿namespace SubtitleParsers.Classes.Parsers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// A parser for the SubStation Alpha subtitles format.
     /// See http://en.wikipedia.org/wiki/SubStation_Alpha for complete explanations.
@@ -127,9 +127,8 @@ namespace SubtitlesParser.Classes.Parsers
                     }
                     else
                     {
-                        var message = string.Format("Couldn't find all the necessary columns " +
-                                                    "headers ({0}, {1}, {2}) in header line {3}",
-                                                    StartColumn, EndColumn, TextColumn, headerLine);
+                        var message = "Couldn't find all the necessary columns "
+                                      + $"headers ({StartColumn}, {EndColumn}, {TextColumn}) in header line {headerLine}";
                         throw new ArgumentException(message);
                     }
                 }
@@ -156,9 +155,7 @@ namespace SubtitlesParser.Classes.Parsers
         /// <returns>The parsed timecode as a TimeSpan instance. If the parsing was unsuccessful, -1 is returned (subtitles should never show)</returns>
         private int ParseSsaTimecode(string s)
         {
-            TimeSpan result;
-
-            if (TimeSpan.TryParse(s, out result))
+            if (TimeSpan.TryParse(s, out var result))
             {
                 var nbOfMs = (int)result.TotalMilliseconds;
                 return nbOfMs;

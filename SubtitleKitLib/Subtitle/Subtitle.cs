@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    using SubtitlesParser.Classes;
+    using SubtitleParsers.Classes;
 
     public class Subtitle : ISubtitle
     {

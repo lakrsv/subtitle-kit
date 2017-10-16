@@ -39,10 +39,8 @@
         public void SubtitleAction_WithNullSubtitle_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(
-                () =>
-                    {
-                        var subtitleAction = new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(1), null);
-                    });
+                // ReSharper disable once ObjectCreationAsStatement
+                () => { new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(1), null); });
         }
     }
 }
