@@ -22,7 +22,7 @@
         [Fact]
         public void Performer_UndoAction_IsOriginal()
         {
-            IAction action = Substitute.For<IAction>();
+            var action = Substitute.For<IAction>();
             var actionPerformer = new ActionPerformer();
 
             actionPerformer.PerformAction(action);
@@ -33,7 +33,7 @@
         [Fact]
         public void Performer_UndoAction_WithNoAction_IsNull()
         {
-            IAction action = Substitute.For<IAction>();
+            var action = Substitute.For<IAction>();
             var actionPerformer = new ActionPerformer();
 
             actionPerformer.PerformAction(action);

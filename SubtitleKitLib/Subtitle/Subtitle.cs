@@ -11,8 +11,8 @@
     {
         internal Subtitle(string filePath, List<SubtitleItem> subtitleItems)
         {
-            this.FilePath = filePath;
-            this.Items = subtitleItems;
+            FilePath = filePath;
+            Items = subtitleItems;
         }
 
         public string FilePath { get; private set; }
@@ -22,32 +22,27 @@
         public object Clone()
         {
             return new Subtitle(
-                this.FilePath,
-                this.Items.ConvertAll(
-                    x => new SubtitlesParser.Classes.SubtitleItem()
-                             {
-                                 StartTime = x.StartTime,
-                                 EndTime = x.EndTime,
-                                 Lines = x.Lines.ToList()
-                             }));
+                FilePath,
+                Items.ConvertAll(
+                    x => new SubtitleItem { StartTime = x.StartTime, EndTime = x.EndTime, Lines = x.Lines.ToList() }));
         }
 
         public void Set(ISubtitle subtitle)
         {
-            this.FilePath = subtitle.FilePath;
-            this.Items = subtitle.Items;
+            FilePath = subtitle.FilePath;
+            Items = subtitle.Items;
         }
 
         public override string ToString()
         {
             var builder = new StringBuilder();
 
-            int lineCount = 1;
-            foreach (var item in this.Items)
+            var lineCount = 1;
+            foreach (var item in Items)
             {
                 builder.Append(lineCount.ToString());
                 builder.Append(Environment.NewLine);
-                builder.Append(item.ToString());
+                builder.Append(item);
                 builder.Append(Environment.NewLine);
                 builder.Append(Environment.NewLine);
 

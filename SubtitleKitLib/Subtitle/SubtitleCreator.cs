@@ -11,16 +11,13 @@
     {
         public ISubtitle CreateFromFile(FileStream fileStream)
         {
-            if (fileStream == null)
-            {
-                throw new ArgumentNullException(nameof(fileStream));
-            }
+            if (fileStream == null) throw new ArgumentNullException(nameof(fileStream));
 
-            ISubtitle subtitle = null;
+            ISubtitle subtitle;
 
             try
             {
-                subtitle = this.GetSubtitleFromStream(fileStream.Name, fileStream);
+                subtitle = GetSubtitleFromStream(fileStream.Name, fileStream);
             }
             catch (FormatException e)
             {
@@ -32,18 +29,15 @@
 
         public ISubtitle CreateFromString(string subtitleContent)
         {
-            if (string.IsNullOrEmpty(subtitleContent))
-            {
-                throw new ArgumentNullException(nameof(subtitleContent));
-            }
+            if (string.IsNullOrEmpty(subtitleContent)) throw new ArgumentNullException(nameof(subtitleContent));
 
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(subtitleContent)))
             {
-                ISubtitle subtitle = null;
+                ISubtitle subtitle;
 
                 try
                 {
-                    subtitle = this.GetSubtitleFromStream(null, stream);
+                    subtitle = GetSubtitleFromStream(null, stream);
                 }
                 catch (FormatException e)
                 {
@@ -56,24 +50,18 @@
 
         public ISubtitle CreateFromUri(Uri uri)
         {
-            if (uri == null)
-            {
-                throw new ArgumentNullException(nameof(uri));
-            }
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
 
-            if (!uri.IsWellFormedOriginalString())
-            {
-                throw new FormatException(nameof(uri) + " is not a well formed uri");
-            }
+            if (!uri.IsWellFormedOriginalString()) throw new FormatException(nameof(uri) + " is not a well formed uri");
 
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(uri);
-            HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
+            var webRequest = (HttpWebRequest)WebRequest.Create(uri);
+            var webResponse = (HttpWebResponse)webRequest.GetResponse();
 
-            ISubtitle subtitle = null;
+            ISubtitle subtitle;
 
             try
             {
-                subtitle = this.GetSubtitleFromStream(uri.AbsolutePath, webResponse.GetResponseStream());
+                subtitle = GetSubtitleFromStream(uri.AbsolutePath, webResponse.GetResponseStream());
             }
             catch (FormatException e)
             {

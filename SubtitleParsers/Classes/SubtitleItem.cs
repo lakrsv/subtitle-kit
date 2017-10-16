@@ -8,9 +8,10 @@ namespace SubtitlesParser.Classes
 
         //Properties------------------------------------------------------------------
         
-        //StartTime and EndTime times are in milliseconds
+        // StartTime and EndTime times are in milliseconds
         public int StartTime { get; set; }
         public int EndTime { get; set; }
+
         public List<string> Lines { get; set; }
         
 
@@ -21,7 +22,7 @@ namespace SubtitlesParser.Classes
         /// </summary>
         public SubtitleItem()
         {
-            this.Lines = new List<string>();
+            Lines = new List<string>();
         }
 
 

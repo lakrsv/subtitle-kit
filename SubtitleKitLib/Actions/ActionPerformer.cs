@@ -9,20 +9,17 @@
 
         public void PerformAction(IAction action, Action onCompleted = null)
         {
-            if (action == null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            if (action == null) throw new ArgumentNullException(nameof(action));
 
             action.PerformAction(onCompleted);
-            this._performedActions.Push(action);
+            _performedActions.Push(action);
         }
 
         public IAction UndoPreviousAction(Action onCompleted = null)
         {
-            if (this._performedActions.Count > 0)
+            if (_performedActions.Count > 0)
             {
-                var action = this._performedActions.Pop();
+                var action = _performedActions.Pop();
                 action.UndoAction(onCompleted);
                 return action;
             }

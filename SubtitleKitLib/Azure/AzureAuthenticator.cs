@@ -13,8 +13,8 @@
         {
             var authContext = new AuthenticationContext(authority);
             var secrets = new Secrets();
-            ClientCredential clientCred = new ClientCredential(secrets.ClientId, secrets.ClientKey);
-            AuthenticationResult result = await authContext.AcquireTokenAsync(resource, clientCred);
+            var clientCred = new ClientCredential(secrets.ClientId, secrets.ClientKey);
+            var result = await authContext.AcquireTokenAsync(resource, clientCred);
 
             if (result == null) throw new InvalidOperationException("Failed to obtain the JWT token");
 

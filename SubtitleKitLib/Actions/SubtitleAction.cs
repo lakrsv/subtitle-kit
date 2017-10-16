@@ -6,26 +6,23 @@
 
     public abstract class SubtitleAction : IAction
     {
-        private ISubtitle _originalSubtitle;
+        private readonly ISubtitle _originalSubtitle;
 
         protected SubtitleAction(ISubtitle subtitle)
         {
-            if (subtitle == null)
-            {
-                throw new ArgumentNullException();
-            }
+            if (subtitle == null) throw new ArgumentNullException();
 
-            this._originalSubtitle = (ISubtitle)subtitle.Clone();
-            this.Subtitle = subtitle;
+            _originalSubtitle = (ISubtitle)subtitle.Clone();
+            Subtitle = subtitle;
         }
 
-        public ISubtitle Subtitle { get; private set; }
+        public ISubtitle Subtitle { get; }
 
         public abstract void PerformAction(Action onCompleted = null);
 
         public virtual void UndoAction(Action onCompleted = null)
         {
-            this.Subtitle.Set(this._originalSubtitle);
+            Subtitle.Set(_originalSubtitle);
             onCompleted?.Invoke();
         }
     }

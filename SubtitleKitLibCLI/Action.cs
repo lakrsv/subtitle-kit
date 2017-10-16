@@ -23,16 +23,16 @@
             switch (action)
             {
                 case "-f":
-                    this._sourceFile = argument;
+                    _sourceFile = argument;
                     break;
                 case "-t":
-                    this._timeOffset = int.Parse(argument);
+                    _timeOffset = int.Parse(argument);
                     break;
                 case "-o":
-                    this._destination = argument;
+                    _destination = argument;
                     break;
                 case "-l":
-                    this._language = argument;
+                    _language = argument;
                     break;
                 default:
                     return false;
@@ -43,19 +43,19 @@
         public void PerformAction()
         {
             var subtitleCreator = new SubtitleCreator();
-            var subtitle = subtitleCreator.CreateFromFile(File.OpenRead(this._sourceFile));
+            var subtitle = subtitleCreator.CreateFromFile(File.OpenRead(_sourceFile));
 
-            if (this._timeOffset != 0)
+            if (_timeOffset != 0)
             {
-                Console.WriteLine("Offsetting your subtitle by " + this._timeOffset + " seconds");
+                Console.WriteLine("Offsetting your subtitle by " + _timeOffset + " seconds");
 
-                var timeOffsetAction = new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(this._timeOffset), subtitle);
+                var timeOffsetAction = new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(_timeOffset), subtitle);
                 timeOffsetAction.PerformAction();
             }
 
-            if (!string.IsNullOrEmpty(this._language))
+            if (!string.IsNullOrEmpty(_language))
             {
-                var culture = new CultureInfo(this._language);
+                var culture = new CultureInfo(_language);
                 var translatorAction = new SubtitleTranslatorAction(subtitle, culture);
 
                 var reset = new ManualResetEvent(false);
@@ -66,7 +66,7 @@
                 translatorAction.PerformAction(
                     () =>
                         {
-                            this.SaveSubtitleToOutput(subtitle, this._destination);
+                            SaveSubtitleToOutput(subtitle, _destination);
                             reset.Set();
                         });
 
@@ -74,15 +74,15 @@
             }
             else
             {
-                this.SaveSubtitleToOutput(subtitle, this._destination);
+                SaveSubtitleToOutput(subtitle, _destination);
             }
         }
 
         private void SaveSubtitleToOutput(ISubtitle subtitle, string outputDestination)
         {
-            string subtitleString = subtitle.ToString();
+            var subtitleString = subtitle.ToString();
 
-            using (var writer = File.CreateText(this._destination))
+            using (var writer = File.CreateText(outputDestination))
             {
                 writer.Write(subtitleString);
             }

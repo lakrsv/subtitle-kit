@@ -13,11 +13,11 @@
 
     public class TranslationService
     {
-        private const int _keyExpirationTimeSeconds = 550;
+        private const int KeyExpirationTimeSeconds = 550;
 
         private static string _authorizationKey;
 
-        private static DateTime? _keyGenerationTime = null;
+        private static DateTime? _keyGenerationTime;
 
         public static object HttpUtility { get; private set; }
 
@@ -32,15 +32,11 @@
 
             var authKey = await GetAuthToken(authToken);
 
-            if (authKey == null)
-            {
-                throw new ArgumentNullException(nameof(authKey));
-            }
+            if (authKey == null) throw new ArgumentNullException(nameof(authKey));
 
             var sourceTextCounter = 0;
 
             foreach (var requestBody in requestBodies)
-            {
                 using (var client = new HttpClient())
                 {
                     using (var request = new HttpRequestMessage())
@@ -59,14 +55,12 @@
                                 var ns = XNamespace.Get(
                                     "http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2");
 
-                                foreach (XElement xe in doc.Descendants(ns + "TranslateArrayResponse"))
+                                foreach (var xe in doc.Descendants(ns + "TranslateArrayResponse"))
                                 {
                                     items[sourceTextCounter].Lines.Clear();
 
                                     foreach (var node in xe.Elements(ns + "TranslatedText"))
-                                    {
                                         items[sourceTextCounter].Lines.Add(node.Value);
-                                    }
 
                                     sourceTextCounter++;
                                 }
@@ -79,7 +73,6 @@
                         }
                     }
                 }
-            }
 
             return items;
         }
@@ -112,12 +105,9 @@
                 builder.Append("<Texts>");
 
                 // Content
-                for (int i = 0; i < 200; i++)
+                for (var i = 0; i < 200; i++)
                 {
-                    if (itemQueue.Count == 0)
-                    {
-                        break;
-                    }
+                    if (itemQueue.Count == 0) break;
 
                     var nextItem = itemQueue.Dequeue();
 
@@ -143,13 +133,8 @@
         private static async Task<string> GetAuthToken(string key)
         {
             if (_keyGenerationTime.HasValue)
-            {
                 if (DateTime.Now.TimeOfDay.TotalSeconds - _keyGenerationTime.Value.TimeOfDay.TotalSeconds
-                    < _keyExpirationTimeSeconds)
-                {
-                    return _authorizationKey;
-                }
-            }
+                    < KeyExpirationTimeSeconds) return _authorizationKey;
 
             _keyGenerationTime = null;
 

@@ -24,20 +24,20 @@
             var newStartTimes = subtitle.Items.Select(s => s.StartTime).ToArray();
             var newEndTimes = subtitle.Items.Select(s => s.EndTime).ToArray();
 
-            for (int i = 0; i < originalStartTimes.Length; i++)
+            for (var i = 0; i < originalStartTimes.Length; i++)
             {
                 var originalTime = originalStartTimes[i];
                 var newTime = newStartTimes[i];
 
-                Assert.True(newTime == originalTime + offset.TotalMilliseconds);
+                Assert.True(newTime == originalTime + (int)offset.TotalMilliseconds);
             }
 
-            for (int i = 0; i < originalEndTimes.Length; i++)
+            for (var i = 0; i < originalEndTimes.Length; i++)
             {
                 var originalTime = originalEndTimes[i];
                 var newTime = newEndTimes[i];
 
-                Assert.True(newTime == originalTime + offset.TotalMilliseconds);
+                Assert.True(newTime == originalTime + (int)offset.TotalMilliseconds);
             }
         }
 
@@ -56,20 +56,20 @@
             var newStartTimes = subtitle.Items.Select(s => s.StartTime).ToArray();
             var newEndTimes = subtitle.Items.Select(s => s.EndTime).ToArray();
 
-            for (int i = 0; i < originalStartTimes.Length; i++)
+            for (var i = 0; i < originalStartTimes.Length; i++)
             {
                 var originalTime = originalStartTimes[i];
                 var newTime = newStartTimes[i];
 
-                Assert.True(newTime == originalTime + offset.TotalMilliseconds);
+                Assert.True(newTime == originalTime + (int)offset.TotalMilliseconds);
             }
 
-            for (int i = 0; i < originalEndTimes.Length; i++)
+            for (var i = 0; i < originalEndTimes.Length; i++)
             {
                 var originalTime = originalEndTimes[i];
                 var newTime = newEndTimes[i];
 
-                Assert.True(newTime == originalTime + offset.TotalMilliseconds);
+                Assert.True(newTime == originalTime + (int)offset.TotalMilliseconds);
             }
         }
 
@@ -89,7 +89,7 @@
             var newStartTimes = subtitle.Items.Select(s => s.StartTime).ToArray();
             var newEndTimes = subtitle.Items.Select(s => s.EndTime).ToArray();
 
-            for (int i = 0; i < originalStartTimes.Length; i++)
+            for (var i = 0; i < originalStartTimes.Length; i++)
             {
                 var originalTime = originalStartTimes[i];
                 var newTime = newStartTimes[i];
@@ -97,7 +97,7 @@
                 Assert.True(newTime == originalTime);
             }
 
-            for (int i = 0; i < originalEndTimes.Length; i++)
+            for (var i = 0; i < originalEndTimes.Length; i++)
             {
                 var originalTime = originalEndTimes[i];
                 var newTime = newEndTimes[i];

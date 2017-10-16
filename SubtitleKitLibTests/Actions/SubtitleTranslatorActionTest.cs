@@ -25,15 +25,13 @@
                             validSub.Items.Count == validSubClone.Items.Count,
                             "Item count after translation changed");
 
-                        bool hasDifferentLines = false;
-                        for (int i = 0; i < validSub.Items.Count; i++)
-                        {
+                        var hasDifferentLines = false;
+                        for (var i = 0; i < validSub.Items.Count; i++)
                             if (!string.Equals(validSub.Items[i].ToString(), validSubClone.Items[i].ToString()))
                             {
                                 hasDifferentLines = true;
                                 break;
                             }
-                        }
 
                         Assert.True(hasDifferentLines);
                     });

@@ -15,7 +15,7 @@
         {
             var validSubtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var subtitleAction = new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(1), validSubtitle);
-            bool didCallback = false;
+            var didCallback = false;
 
             subtitleAction.PerformAction(() => didCallback = true);
 
@@ -27,7 +27,7 @@
         {
             var validSubtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var subtitleAction = new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(1), validSubtitle);
-            bool didCallback = false;
+            var didCallback = false;
 
             subtitleAction.PerformAction();
             subtitleAction.UndoAction(() => didCallback = true);

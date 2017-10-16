@@ -1,9 +1,9 @@
 ﻿namespace SubtitleKitLibCLI
 {
-    class Program
+    internal class Program
     {
         // TODO - Clean this up. This is for testing only now.
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Usage: -f "file" -l "Language" -o "output"
             // Usage: -f "file" -t seconds -o "output"
@@ -16,10 +16,10 @@
                        };
 
             var action = new Action();
-            for (int i = 0; i < args.Length; i += 2)
+            for (var i = 0; i < args.Length; i += 2)
             {
-                string actionParam = args[i];
-                string argumentParam = args[i + 1];
+                var actionParam = args[i];
+                var argumentParam = args[i + 1];
 
                 action.AddParameter(actionParam, argumentParam);
             }

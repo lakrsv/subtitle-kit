@@ -11,7 +11,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Subtitle_Created_WithBadUri_ThrowsFormatException()
         {
-            Uri uri = new Uri(@"http://www.contoso.com/path???/file name");
+            var uri = new Uri(@"http://www.contoso.com/path???/file name");
             var subtitleCreator = new SubtitleCreator();
 
             Assert.Throws<FormatException>(() => subtitleCreator.CreateFromUri(uri));
@@ -52,7 +52,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Subtitle_Created_WithInvalidUriSub_ThrowsFormatException()
         {
-            Uri uri = new Uri("https://pastebin.com/raw/VTQTK2fU");
+            var uri = new Uri("https://pastebin.com/raw/VTQTK2fU");
             var subtitleCreator = new SubtitleCreator();
 
             Assert.Throws<FormatException>(() => subtitleCreator.CreateFromUri(uri));
@@ -61,7 +61,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Subtitle_Created_WithInvalidUriSub_ThrowsFormatException2()
         {
-            Uri uri = new Uri("http://temporalis.io/");
+            var uri = new Uri("http://temporalis.io/");
             var subtitleCreator = new SubtitleCreator();
 
             Assert.Throws<FormatException>(() => subtitleCreator.CreateFromUri(uri));
@@ -116,7 +116,7 @@ namespace SubtitleKitLibTests.Subtitle
         [Fact]
         public void Subtitle_Created_WithValidUriSub_IsNotNull()
         {
-            Uri uri = new Uri("https://pastebin.com/raw/e3fAjQxZ");
+            var uri = new Uri("https://pastebin.com/raw/e3fAjQxZ");
             var subtitleCreator = new SubtitleCreator();
 
             var subtitle = subtitleCreator.CreateFromUri(uri);

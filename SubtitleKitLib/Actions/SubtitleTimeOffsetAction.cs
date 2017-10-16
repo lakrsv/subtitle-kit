@@ -11,15 +11,15 @@
         public SubtitleTimeOffsetAction(TimeSpan offset, ISubtitle subtitle)
             : base(subtitle)
         {
-            this._offset = offset;
+            _offset = offset;
         }
 
         public override void PerformAction(Action onCompleted = null)
         {
-            foreach (var item in this.Subtitle.Items)
+            foreach (var item in Subtitle.Items)
             {
-                item.StartTime += (int)this._offset.TotalMilliseconds;
-                item.EndTime += (int)this._offset.TotalMilliseconds;
+                item.StartTime += (int)_offset.TotalMilliseconds;
+                item.EndTime += (int)_offset.TotalMilliseconds;
             }
 
             onCompleted?.Invoke();

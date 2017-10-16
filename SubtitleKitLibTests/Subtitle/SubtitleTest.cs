@@ -1,6 +1,7 @@
 ﻿namespace SubtitleKitLibTests.Subtitle
 {
     using System;
+    using System.Linq;
 
     using SubtitleKitLib.Subtitle;
 
@@ -22,16 +23,7 @@
         {
             var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
             var clone = (ISubtitle)subtitle.Clone();
-            bool matchesOriginal = true;
-
-            for (int i = 0; i < subtitle.Items.Count; i++)
-            {
-                if (!string.Equals(subtitle.Items[i].ToString(), clone.Items[i].ToString(), StringComparison.Ordinal))
-                {
-                    matchesOriginal = false;
-                    break;
-                }
-            }
+            var matchesOriginal = !subtitle.Items.Where((t, i) => !string.Equals(t.ToString(), clone.Items[i].ToString(), StringComparison.Ordinal)).Any();
 
             Assert.True(matchesOriginal);
         }
@@ -45,10 +37,8 @@
             var subtitleString = subtitle.ToString();
             var reconstructedSubtitle = subtitleCreator.CreateFromString(subtitleString);
 
-            for (int i = 0; i < subtitle.Items.Count; i++)
-            {
+            for (var i = 0; i < subtitle.Items.Count; i++)
                 Assert.Equal(subtitle.Items[i].ToString(), reconstructedSubtitle.Items[i].ToString());
-            }
         }
     }
 }

@@ -3,7 +3,7 @@
     using System;
     using System.IO;
 
-    interface ISubtitleCreator
+    internal interface ISubtitleCreator
     {
         ISubtitle CreateFromFile(FileStream fileStream);
 
