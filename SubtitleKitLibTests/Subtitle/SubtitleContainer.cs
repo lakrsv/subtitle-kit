@@ -1,18 +1,20 @@
-﻿using SubtitleKitLib.Subtitle;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace SubtitleKitLibTests.Subtitle
+﻿namespace SubtitleKitLibTests.Subtitle
 {
+    using System.IO;
+
+    using SubtitleKitLib.Subtitle;
+
     public static class SubtitleContainer
     {
-        public static string SubtitleFolderPath = @"Content/SubtitlesFiles/";
-        public static string ValidSubtitleName = "Annie Hall - Eng 25fps.srt";
-        public static string ValidShortSubtitleName = "shortsub.srt";
         public static string InvalidSubtitleName = "badsubtitle.srt";
+
         public static string InvalidSubtitleName2 = "badsubtitle2.srt";
+
+        public static string SubtitleFolderPath = @"Content/SubtitlesFiles/";
+
+        public static string ValidShortSubtitleName = "shortsub.srt";
+
+        public static string ValidSubtitleName = "Annie Hall - Eng 25fps.srt";
 
         public static ISubtitle GetSubtitleFromFile(string fileName)
         {

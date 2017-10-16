@@ -1,40 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SubtitleKitLib;
-using SubtitleKitLib.Subtitle;
-using System.IO;
-using SubtitleKitLib.Actions;
-using System.Globalization;
-using System.Threading;
-
-namespace SubtitleKitLibCLI
+﻿namespace SubtitleKitLibCLI
 {
+    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Threading;
+
+    using SubtitleKitLib.Actions;
+    using SubtitleKitLib.Subtitle;
+
     public class Action
     {
-        private string _sourceFile;
-
         private string _destination;
 
-        private int _timeOffset;
-
         private string _language;
+
+        private string _sourceFile;
+
+        private int _timeOffset;
 
         public bool AddParameter(string action, string argument)
         {
             switch (action)
             {
                 case "-f":
-                    _sourceFile = argument;
+                    this._sourceFile = argument;
                     break;
                 case "-t":
-                    _timeOffset = int.Parse(argument);
+                    this._timeOffset = int.Parse(argument);
                     break;
                 case "-o":
-                    _destination = argument;
+                    this._destination = argument;
                     break;
                 case "-l":
-                    _language = argument;
+                    this._language = argument;
                     break;
                 default:
                     return false;
@@ -45,18 +43,19 @@ namespace SubtitleKitLibCLI
         public void PerformAction()
         {
             var subtitleCreator = new SubtitleCreator();
-            var subtitle = subtitleCreator.CreateFromFile(File.OpenRead(_sourceFile));
+            var subtitle = subtitleCreator.CreateFromFile(File.OpenRead(this._sourceFile));
 
-            if(_timeOffset != 0)
+            if (this._timeOffset != 0)
             {
-                Console.WriteLine("Offsetting your subtitle by " + _timeOffset + " seconds");
+                Console.WriteLine("Offsetting your subtitle by " + this._timeOffset + " seconds");
 
-                var timeOffsetAction = new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(_timeOffset), subtitle);
+                var timeOffsetAction = new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(this._timeOffset), subtitle);
                 timeOffsetAction.PerformAction();
             }
-            if(!string.IsNullOrEmpty(_language))
+
+            if (!string.IsNullOrEmpty(this._language))
             {
-                var culture = new CultureInfo(_language);
+                var culture = new CultureInfo(this._language);
                 var translatorAction = new SubtitleTranslatorAction(subtitle, culture);
 
                 var reset = new ManualResetEvent(false);
@@ -64,25 +63,26 @@ namespace SubtitleKitLibCLI
                 Console.WriteLine("Translating your subtitle to " + culture.EnglishName);
                 Console.WriteLine("Please wait...");
 
-                translatorAction.PerformAction(()=> 
-                {
-                    SaveSubtitleToOutput(subtitle, _destination);
-                    reset.Set();
-                });
+                translatorAction.PerformAction(
+                    () =>
+                        {
+                            this.SaveSubtitleToOutput(subtitle, this._destination);
+                            reset.Set();
+                        });
 
                 reset.WaitOne();
             }
             else
             {
-                SaveSubtitleToOutput(subtitle, _destination);
+                this.SaveSubtitleToOutput(subtitle, this._destination);
             }
         }
 
         private void SaveSubtitleToOutput(ISubtitle subtitle, string outputDestination)
         {
             string subtitleString = subtitle.ToString();
-            
-            using(var writer = File.CreateText(_destination))
+
+            using (var writer = File.CreateText(this._destination))
             {
                 writer.Write(subtitleString);
             }

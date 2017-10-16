@@ -1,13 +1,12 @@
-﻿using SubtitlesParser.Classes.Parsers;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.IO;
-using System.Net;
-using System.Text;
-
-namespace SubtitleKitLib.Subtitle
+﻿namespace SubtitleKitLib.Subtitle
 {
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Text;
+
+    using SubtitlesParser.Classes.Parsers;
+
     public class SubtitleCreator : ISubtitleCreator
     {
         public ISubtitle CreateFromFile(FileStream fileStream)
@@ -21,14 +20,38 @@ namespace SubtitleKitLib.Subtitle
 
             try
             {
-                subtitle = GetSubtitleFromStream(fileStream.Name, fileStream);
+                subtitle = this.GetSubtitleFromStream(fileStream.Name, fileStream);
             }
-            catch(FormatException e)
+            catch (FormatException e)
             {
                 throw new FormatException(string.Format("Subtitle File {0} is invalid", fileStream.Name), e);
             }
 
             return subtitle;
+        }
+
+        public ISubtitle CreateFromString(string subtitleContent)
+        {
+            if (string.IsNullOrEmpty(subtitleContent))
+            {
+                throw new ArgumentNullException(nameof(subtitleContent));
+            }
+
+            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(subtitleContent)))
+            {
+                ISubtitle subtitle = null;
+
+                try
+                {
+                    subtitle = this.GetSubtitleFromStream(null, stream);
+                }
+                catch (FormatException e)
+                {
+                    throw new FormatException("Subtitle String is invalid", e);
+                }
+
+                return subtitle;
+            }
         }
 
         public ISubtitle CreateFromUri(Uri uri)
@@ -50,7 +73,7 @@ namespace SubtitleKitLib.Subtitle
 
             try
             {
-                subtitle = GetSubtitleFromStream(uri.AbsolutePath, webResponse.GetResponseStream());
+                subtitle = this.GetSubtitleFromStream(uri.AbsolutePath, webResponse.GetResponseStream());
             }
             catch (FormatException e)
             {
@@ -58,30 +81,6 @@ namespace SubtitleKitLib.Subtitle
             }
 
             return subtitle;
-        }
-
-        public ISubtitle CreateFromString(string subtitleContent)
-        {
-            if (string.IsNullOrEmpty(subtitleContent))
-            {
-                throw new ArgumentNullException(nameof(subtitleContent));
-            }
-
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(subtitleContent)))
-            {
-                ISubtitle subtitle = null;
-
-                try
-                {
-                    subtitle = GetSubtitleFromStream(null, stream);
-                }
-                catch (FormatException e)
-                {
-                    throw new FormatException("Subtitle String is invalid", e);
-                }
-
-                return subtitle;
-            }
         }
 
         private ISubtitle GetSubtitleFromStream(string filePath, Stream stream)
@@ -98,7 +97,7 @@ namespace SubtitleKitLib.Subtitle
             {
                 throw e;
             }
-            catch(ArgumentException e)
+            catch (ArgumentException e)
             {
                 throw new FormatException(e.Message, e);
             }

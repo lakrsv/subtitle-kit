@@ -1,15 +1,14 @@
-﻿using SubtitleKitLib.Actions;
-using SubtitleKitLib.Azure;
-using SubtitleKitLib.Subtitle;
-using SubtitleKitLibTests.Subtitle;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using Xunit;
-
-namespace SubtitleKitLibTests.Actions
+﻿namespace SubtitleKitLibTests.Actions
 {
+    using System.Globalization;
+
+    using SubtitleKitLib.Actions;
+    using SubtitleKitLib.Subtitle;
+
+    using SubtitleKitLibTests.Subtitle;
+
+    using Xunit;
+
     public class SubtitleTranslatorActionTest
     {
         [Fact]
@@ -19,21 +18,25 @@ namespace SubtitleKitLibTests.Actions
             var validSubClone = (ISubtitle)validSub.Clone();
             var subtitleTranslator = new SubtitleTranslatorAction(validSub, new CultureInfo("no"));
 
-            subtitleTranslator.PerformAction(()=>
-            {
-                Assert.True(validSub.Items.Count == validSubClone.Items.Count, "Item count after translation changed");
-
-                bool hasDifferentLines = false;
-                for (int i = 0; i < validSub.Items.Count; i++)
-                {
-                    if(!string.Equals(validSub.Items[i].ToString(), validSubClone.Items[i].ToString()))
+            subtitleTranslator.PerformAction(
+                () =>
                     {
-                        hasDifferentLines = true;
-                        break;
-                    }
-                }
-                Assert.True(hasDifferentLines);
-            });
+                        Assert.True(
+                            validSub.Items.Count == validSubClone.Items.Count,
+                            "Item count after translation changed");
+
+                        bool hasDifferentLines = false;
+                        for (int i = 0; i < validSub.Items.Count; i++)
+                        {
+                            if (!string.Equals(validSub.Items[i].ToString(), validSubClone.Items[i].ToString()))
+                            {
+                                hasDifferentLines = true;
+                                break;
+                            }
+                        }
+
+                        Assert.True(hasDifferentLines);
+                    });
         }
     }
 }

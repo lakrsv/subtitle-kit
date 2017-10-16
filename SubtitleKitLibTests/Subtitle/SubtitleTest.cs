@@ -1,15 +1,22 @@
-﻿using SubtitleKitLib.Subtitle;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Xunit;
-
-namespace SubtitleKitLibTests.Subtitle
+﻿namespace SubtitleKitLibTests.Subtitle
 {
+    using System;
+
+    using SubtitleKitLib.Subtitle;
+
+    using Xunit;
+
     public class SubtitleTest
     {
+        [Fact]
+        public void Cloned_Subtitle_IsNotReference()
+        {
+            var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
+            var clone = (ISubtitle)subtitle.Clone();
+
+            Assert.False(subtitle.Items.Equals(clone.Items));
+        }
+
         [Fact]
         public void Cloned_Subtitle_MatchesOriginal()
         {
@@ -30,15 +37,6 @@ namespace SubtitleKitLibTests.Subtitle
         }
 
         [Fact]
-        public void Cloned_Subtitle_IsNotReference()
-        {
-            var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
-            var clone = (ISubtitle)subtitle.Clone();
-
-            Assert.False(subtitle.Items.Equals(clone.Items));
-        }
-
-        [Fact]
         public void Subtitle_ToString_MatchesSource()
         {
             var subtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidSubtitleName);
@@ -47,7 +45,7 @@ namespace SubtitleKitLibTests.Subtitle
             var subtitleString = subtitle.ToString();
             var reconstructedSubtitle = subtitleCreator.CreateFromString(subtitleString);
 
-            for(int i = 0; i < subtitle.Items.Count; i++)
+            for (int i = 0; i < subtitle.Items.Count; i++)
             {
                 Assert.Equal(subtitle.Items[i].ToString(), reconstructedSubtitle.Items[i].ToString());
             }

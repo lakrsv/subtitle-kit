@@ -1,13 +1,13 @@
-﻿using SubtitleKitLib.Actions;
-using SubtitleKitLib.Subtitle;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using NSubstitute;
-
-namespace SubtitleKitLibTests.Actions
+﻿namespace SubtitleKitLibTests.Actions
 {
+    using System;
+
+    using NSubstitute;
+
+    using SubtitleKitLib.Actions;
+
+    using Xunit;
+
     public class ActionPerformerTest
     {
         [Fact]

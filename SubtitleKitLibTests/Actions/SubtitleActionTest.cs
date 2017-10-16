@@ -1,12 +1,13 @@
-﻿using SubtitleKitLib.Actions;
-using SubtitleKitLibTests.Subtitle;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-
-namespace SubtitleKitLibTests.Actions
+﻿namespace SubtitleKitLibTests.Actions
 {
+    using System;
+
+    using SubtitleKitLib.Actions;
+
+    using SubtitleKitLibTests.Subtitle;
+
+    using Xunit;
+
     public class SubtitleActionTest
     {
         [Fact]
@@ -37,10 +38,11 @@ namespace SubtitleKitLibTests.Actions
         [Fact]
         public void SubtitleAction_WithNullSubtitle_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                var subtitleAction = new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(1), null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    {
+                        var subtitleAction = new SubtitleTimeOffsetAction(TimeSpan.FromSeconds(1), null);
+                    });
         }
     }
 }

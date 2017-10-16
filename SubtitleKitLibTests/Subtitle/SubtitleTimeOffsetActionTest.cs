@@ -1,13 +1,12 @@
-﻿using SubtitleKitLib.Actions;
-using SubtitleKitLib.Subtitle;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xunit;
-
-namespace SubtitleKitLibTests.Subtitle
+﻿namespace SubtitleKitLibTests.Subtitle
 {
+    using System;
+    using System.Linq;
+
+    using SubtitleKitLib.Actions;
+
+    using Xunit;
+
     public class SubtitleTimeOffsetActionTest
     {
         [Fact]
@@ -25,14 +24,15 @@ namespace SubtitleKitLibTests.Subtitle
             var newStartTimes = subtitle.Items.Select(s => s.StartTime).ToArray();
             var newEndTimes = subtitle.Items.Select(s => s.EndTime).ToArray();
 
-            for(int i = 0; i < originalStartTimes.Length; i++)
+            for (int i = 0; i < originalStartTimes.Length; i++)
             {
                 var originalTime = originalStartTimes[i];
                 var newTime = newStartTimes[i];
 
                 Assert.True(newTime == originalTime + offset.TotalMilliseconds);
             }
-            for(int i = 0; i < originalEndTimes.Length; i++)
+
+            for (int i = 0; i < originalEndTimes.Length; i++)
             {
                 var originalTime = originalEndTimes[i];
                 var newTime = newEndTimes[i];
@@ -63,6 +63,7 @@ namespace SubtitleKitLibTests.Subtitle
 
                 Assert.True(newTime == originalTime + offset.TotalMilliseconds);
             }
+
             for (int i = 0; i < originalEndTimes.Length; i++)
             {
                 var originalTime = originalEndTimes[i];
@@ -95,6 +96,7 @@ namespace SubtitleKitLibTests.Subtitle
 
                 Assert.True(newTime == originalTime);
             }
+
             for (int i = 0; i < originalEndTimes.Length; i++)
             {
                 var originalTime = originalEndTimes[i];

@@ -1,8 +1,7 @@
-﻿
-using System;
-
-namespace SubtitleKitLib.Actions
+﻿namespace SubtitleKitLib.Actions
 {
+    using System;
+
     public interface IAction
     {
         void PerformAction(Action onCompleted);

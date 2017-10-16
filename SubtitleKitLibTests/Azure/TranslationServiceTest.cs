@@ -1,13 +1,14 @@
-﻿using SubtitleKitLib.Azure;
-using SubtitleKitLibTests.Subtitle;
-using SubtitlesParser.Classes;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using Xunit;
-namespace SubtitleKitLibTests.Azure
+﻿namespace SubtitleKitLibTests.Azure
 {
+    using System;
+    using System.Globalization;
+
+    using SubtitleKitLib.Azure;
+
+    using SubtitleKitLibTests.Subtitle;
+
+    using Xunit;
+
     public class TranslationServiceTest
     {
         [Fact]
@@ -15,10 +16,14 @@ namespace SubtitleKitLibTests.Azure
         {
             var validSubtitle = SubtitleContainer.GetSubtitleFromFile(SubtitleContainer.ValidShortSubtitleName);
 
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await TranslationService.TranslateArrayAsync(validSubtitle.Items.ToArray(), CultureInfo.CurrentCulture, null);
-            });
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                async () =>
+                    {
+                        await TranslationService.TranslateArrayAsync(
+                            validSubtitle.Items.ToArray(),
+                            CultureInfo.CurrentCulture,
+                            null);
+                    });
         }
     }
 }

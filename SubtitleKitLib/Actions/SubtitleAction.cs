@@ -1,15 +1,12 @@
-﻿using SubtitleKitLib.Subtitle;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SubtitleKitLib.Actions
+﻿namespace SubtitleKitLib.Actions
 {
+    using System;
+
+    using SubtitleKitLib.Subtitle;
+
     public abstract class SubtitleAction : IAction
     {
         private ISubtitle _originalSubtitle;
-
-        public ISubtitle Subtitle { get; private set; }
 
         protected SubtitleAction(ISubtitle subtitle)
         {
@@ -18,15 +15,17 @@ namespace SubtitleKitLib.Actions
                 throw new ArgumentNullException();
             }
 
-            _originalSubtitle = (ISubtitle)subtitle.Clone();
-            Subtitle = subtitle;
+            this._originalSubtitle = (ISubtitle)subtitle.Clone();
+            this.Subtitle = subtitle;
         }
+
+        public ISubtitle Subtitle { get; private set; }
 
         public abstract void PerformAction(Action onCompleted = null);
 
         public virtual void UndoAction(Action onCompleted = null)
         {
-            Subtitle.Set(_originalSubtitle);
+            this.Subtitle.Set(this._originalSubtitle);
             onCompleted?.Invoke();
         }
     }

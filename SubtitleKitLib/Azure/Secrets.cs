@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SubtitleKitLib.Azure
+﻿namespace SubtitleKitLib.Azure
 {
+    using System;
+
     public class Secrets
     {
         public string ClientId => Environment.GetEnvironmentVariable("SubClientId");
+
         public string ClientKey => Environment.GetEnvironmentVariable("SubClientSecret");
+
         public string SecretId => Environment.GetEnvironmentVariable("SubSecretUri");
     }
 }

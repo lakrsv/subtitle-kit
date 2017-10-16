@@ -1,24 +1,30 @@
-﻿using SubtitlesParser.Classes;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace SubtitleKitLib.Azure
+﻿namespace SubtitleKitLib.Azure
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Net;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Xml.Linq;
+
+    using SubtitlesParser.Classes;
+
     public class TranslationService
     {
-        public static object HttpUtility { get; private set; }
-
-        private static string _authorizationKey;
-        private static DateTime? _keyGenerationTime = null;
         private const int _keyExpirationTimeSeconds = 550;
 
-        public static async Task<SubtitleItem[]> TranslateArrayAsync(SubtitleItem[] items, CultureInfo culture, string authToken)
+        private static string _authorizationKey;
+
+        private static DateTime? _keyGenerationTime = null;
+
+        public static object HttpUtility { get; private set; }
+
+        public static async Task<SubtitleItem[]> TranslateArrayAsync(
+            SubtitleItem[] items,
+            CultureInfo culture,
+            string authToken)
         {
             var to = culture.TwoLetterISOLanguageName;
             var uri = "https://api.microsofttranslator.com/v2/Http.svc/TranslateArray";
@@ -50,7 +56,8 @@ namespace SubtitleKitLib.Azure
                             case HttpStatusCode.OK:
                                 Console.WriteLine("Request status is OK. Result of translate array method is:");
                                 var doc = XDocument.Parse(responseBody);
-                                var ns = XNamespace.Get("http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2");
+                                var ns = XNamespace.Get(
+                                    "http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2");
 
                                 foreach (XElement xe in doc.Descendants(ns + "TranslateArrayResponse"))
                                 {
@@ -60,8 +67,10 @@ namespace SubtitleKitLib.Azure
                                     {
                                         items[sourceTextCounter].Lines.Add(node.Value);
                                     }
+
                                     sourceTextCounter++;
                                 }
+
                                 break;
                             default:
                                 Console.WriteLine("Request status code is: {0}.", response.StatusCode);
@@ -71,6 +80,7 @@ namespace SubtitleKitLib.Azure
                     }
                 }
             }
+
             return items;
         }
 
@@ -82,24 +92,29 @@ namespace SubtitleKitLib.Azure
 
             while (itemQueue.Count > 0)
             {
-                //Header
+                // Header
                 builder.Append("<TranslateArrayRequest>");
                 builder.Append("<AppId />");
                 builder.Append("<From />");
                 builder.Append("<Options>");
-                builder.Append("<Category xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />");
-                builder.Append("<ContentType xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />");
-                builder.Append("<ReservedFlags xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />");
-                builder.Append("<State xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" >0</State>");
+                builder.Append(
+                    "<Category xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />");
+                builder.Append(
+                    "<ContentType xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />");
+                builder.Append(
+                    "<ReservedFlags xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />");
+                builder.Append(
+                    "<State xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" >0</State>");
                 builder.Append("<Uri xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />");
-                builder.Append("<User xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />");
+                builder.Append(
+                    "<User xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />");
                 builder.Append("</Options>");
                 builder.Append("<Texts>");
 
-                //Content
+                // Content
                 for (int i = 0; i < 200; i++)
                 {
-                    if(itemQueue.Count == 0)
+                    if (itemQueue.Count == 0)
                     {
                         break;
                     }
@@ -111,7 +126,7 @@ namespace SubtitleKitLib.Azure
                     builder.Append("</string>");
                 }
 
-                //Footer
+                // Footer
                 builder.Append("</Texts>");
                 builder.Append("<To>");
                 builder.Append(languageCode);
@@ -129,7 +144,8 @@ namespace SubtitleKitLib.Azure
         {
             if (_keyGenerationTime.HasValue)
             {
-                if (DateTime.Now.TimeOfDay.TotalSeconds - _keyGenerationTime.Value.TimeOfDay.TotalSeconds < _keyExpirationTimeSeconds)
+                if (DateTime.Now.TimeOfDay.TotalSeconds - _keyGenerationTime.Value.TimeOfDay.TotalSeconds
+                    < _keyExpirationTimeSeconds)
                 {
                     return _authorizationKey;
                 }

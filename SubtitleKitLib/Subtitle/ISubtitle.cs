@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SubtitleKitLib.Subtitle
+﻿namespace SubtitleKitLib.Subtitle
 {
+    using System;
+    using System.Collections.Generic;
+
+    using SubtitlesParser.Classes;
+
     public interface ISubtitle : ICloneable
     {
         string FilePath { get; }
 
-        List<SubtitlesParser.Classes.SubtitleItem> Items { get; }
+        List<SubtitleItem> Items { get; }
 
         void Set(ISubtitle subtitle);
 

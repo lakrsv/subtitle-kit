@@ -1,35 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SubtitleKitLib.Subtitle
+﻿namespace SubtitleKitLib.Subtitle
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using SubtitlesParser.Classes;
+
     public class Subtitle : ISubtitle
     {
-        public string FilePath { get; private set; }
-        public List<SubtitlesParser.Classes.SubtitleItem> Items { get; private set; }
-
-        internal Subtitle(string filePath, List<SubtitlesParser.Classes.SubtitleItem> subtitleItems)
+        internal Subtitle(string filePath, List<SubtitleItem> subtitleItems)
         {
-            FilePath = filePath;
-            Items = subtitleItems;
+            this.FilePath = filePath;
+            this.Items = subtitleItems;
+        }
+
+        public string FilePath { get; private set; }
+
+        public List<SubtitleItem> Items { get; private set; }
+
+        public object Clone()
+        {
+            return new Subtitle(
+                this.FilePath,
+                this.Items.ConvertAll(
+                    x => new SubtitlesParser.Classes.SubtitleItem()
+                             {
+                                 StartTime = x.StartTime,
+                                 EndTime = x.EndTime,
+                                 Lines = x.Lines.ToList()
+                             }));
         }
 
         public void Set(ISubtitle subtitle)
         {
-            FilePath = subtitle.FilePath;
-            Items = subtitle.Items;
-        }
-
-        public object Clone()
-        {
-            return new Subtitle(FilePath, Items.ConvertAll(x => new SubtitlesParser.Classes.SubtitleItem()
-            {
-                StartTime = x.StartTime,
-                EndTime = x.EndTime,
-                Lines = x.Lines.ToList()
-            }));
+            this.FilePath = subtitle.FilePath;
+            this.Items = subtitle.Items;
         }
 
         public override string ToString()
@@ -37,7 +43,7 @@ namespace SubtitleKitLib.Subtitle
             var builder = new StringBuilder();
 
             int lineCount = 1;
-            foreach(var item in Items)
+            foreach (var item in this.Items)
             {
                 builder.Append(lineCount.ToString());
                 builder.Append(Environment.NewLine);

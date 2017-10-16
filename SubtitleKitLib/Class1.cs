@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SubtitleKitLib
+﻿namespace SubtitleKitLib
 {
     public class Class1
     {

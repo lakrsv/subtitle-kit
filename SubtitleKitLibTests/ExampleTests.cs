@@ -1,7 +1,7 @@
-﻿using Xunit;
-
-namespace SubtitleKitLibTests
+﻿namespace SubtitleKitLibTests
 {
+    using Xunit;
+
     public class ExampleTests
     {
         [Fact]
